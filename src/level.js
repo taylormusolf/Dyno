@@ -1,17 +1,30 @@
-function Level() {
-  this.BG_COLOR = "#000000";
-  this.DIM_X = 270;
-  this.DIM_Y = 270;
+class Level{
+  constructor(){
+    // this.BG_COLOR = "#000000";
+    // this.DIM_X = 270;
+    // this.DIM_Y = 270;
+    this.numPlatforms = 2;
+    this.platforms = [];
+    this.createplat();
+  }
+  
+
+
+  // Function to create platforms
+  createplat(){
+    for(let i = 0; i < this.numPlatforms; i++) {
+        this.platforms.push(
+            {
+            x: 100 * i,
+            y: 200 + (30 * i),
+            width: 110,
+            height: 20
+            }
+        );
+    }
+  }
+
 }
-
-Level.prototype.draw = function draw(ctx) {
-  ctx.clearRect(0, 0, Level.DIM_X, Level.DIM_Y);
-  ctx.fillStyle = Level.BG_COLOR;
-  ctx.fillRect(0, 0, Level.DIM_X, Level.DIM_Y);
-};
-
-
-
 
 
 module.exports = Level;

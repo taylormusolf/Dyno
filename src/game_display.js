@@ -1,13 +1,24 @@
-function GameDisplay(level, ctx) {
-  this.ctx = ctx;
-  this.level = level;
+const Game = require('./game')
+
+
+class GameDisplay {
+  constructor(ctx){
+    this.game = new Game(ctx);
+  }
+  
+
+
+  start() {
+    this.game.keyListeners();
+    setInterval(() => {
+      this.game.loop();
+    }, 22)
+  };
+
+
 }
 
 
-
-GameDisplay.prototype.start = function start() {
-  this.level.draw(this.ctx);
-};
 
 
 
