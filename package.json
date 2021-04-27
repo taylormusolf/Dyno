@@ -1,0 +1,28 @@
+{
+  "name": "dyno",
+  "version": "1.0.0",
+  "description": "game",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --watch --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taylormusolf/Dyno.git"
+  },
+  "author": "Taylor Musolf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taylormusolf/Dyno/issues"
+  },
+  "homepage": "https://github.com/taylormusolf/Dyno#readme",
+  "dependencies": {
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0"
+  },
+  "devDependencies": {
+    "file-loader": "^6.2.0",
+    "url-loader": "^4.1.1"
+  }
+}
