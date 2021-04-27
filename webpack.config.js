@@ -13,7 +13,6 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
-                            limit: 8192,
                         },
                     },
                 ],
