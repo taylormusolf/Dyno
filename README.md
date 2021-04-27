@@ -26,13 +26,13 @@ The goal is to reach the exit
  * game logic will be in JavaScript
  * game objects and images rendered in HTML 5 canvas
  * game audio will utilize HTML audio
- * game to be bundled with webpack and browserfy?
- Major files will include the entry file, game.js, player.js
+ * game to be bundled with webpack
+ Major files will include the entry file, game.js, player.js, rope.js
 
 ## Timeline
  * Day 1: Setup all necessary dependencies.  Write skeleton of entry file and all needed files.  
   Start getting base environment rendered and begin player movement.
- * Day 2: Finish basic movement and work on rope physics
+ * Day 2: Finish basic movement and work on rope physics.  Finish player.js and work on rope.js.
  * Day 3: Finish rope physics and add 'memento' items
  * Day 4: Add level variation and finish styling
 
