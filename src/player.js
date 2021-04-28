@@ -10,6 +10,7 @@ class Player{
     this.width = 20;
     this.gravity = 0.6;
     this.friction = 0.7;
+    this.climbing = false;
   }
 
 };
