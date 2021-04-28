@@ -120,24 +120,34 @@ class Game{
         }
       }  
     }
-    if(this.keys.left &&
-      (this.player.x >= this.level.walls[0].x 
-        && this.player.x + this.player.width <= this.level.walls[0].x + this.level.walls[0].width)
-        && (this.player.y >= this.level.walls[0].y 
-        && this.player.y + this.player.height <= this.level.walls[0].y + this.level.walls[0].height)
-      ){
-        this.player.x_v = 0;
-        this.player.x -=1
+    // if(this.keys.left &&
+    //   (this.player.x >= this.level.walls[0].x 
+    //     && this.player.x + this.player.width <= this.level.walls[0].x + this.level.walls[0].width)
+    //     && (this.player.y >= this.level.walls[0].y 
+    //     && this.player.y + this.player.height <= this.level.walls[0].y + this.level.walls[0].height)
+    //   ){
+    //     this.player.x_v = 0;
+    //     this.player.x -=1
+    // }
+    for (let i = 0; i < this.level.walls.length; i++){
+      //left side of wall
+      if( this.player.x >= this.level.walls[i].x && this.player.x + this.player.width < this.level.walls[i].x + this.level.walls[i].width
+        && (this.player.y >= this.level.walls[i].y || this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
+        ){
+        this.player.x = this.level.walls[i].x;
+      }
+      //right side of wall
+      console.log('player:')
+      console.log(this.player.x);
+      // console.log('wall:')
+      // console.log(this.level.walls[0].x + this.level.walls[0].width)
+      if( this.player.x > this.level.walls[i].x && this.player.x <= this.level.walls[i].x + this.level.walls[i].width
+        && (this.player.y >= this.level.walls[i].y || this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
+      ) {
+        this.player.x = (this.level.walls[i].x + this.level.walls[i].width);
+      }
     }
-    if(this.keys.right &&
-      (this.player.x <= this.level.walls[0].x 
-        && this.player.x + this.player.width >= this.level.walls[0].x + this.level.walls[0].width)
-        && (this.player.y <= this.level.walls[0].y 
-        && this.player.y + this.player.height >= this.level.walls[0].y + this.level.walls[0].height)
-      ){
-        this.player.x_v = 0;
-        this.keys.right = false;
-    }
+    
     
 
     this.renderCanvas();
