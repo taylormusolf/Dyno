@@ -73,7 +73,7 @@ class Level{
     // )
     this.walls.push(
       {
-      x: 250,
+      x: 50,
       y: 221,
       width: 25,
       height: 729
@@ -81,12 +81,12 @@ class Level{
     )
     this.walls.push(
       {
-      x: 50,
+      x: 250,
       y: 221,
       width: 25,
       height: 729
       }
-    )  
+    )
     this.walls.push(
       {
       x: 400,

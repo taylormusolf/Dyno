@@ -72,22 +72,22 @@ class Game{
         this.keys.right = true;
         this.playerImg.src = '../src/assets/images/climber_right.png'
     }
-    if(e.keyCode === 87) {
-      if(this.player.climbing) {
-        this.keys.up = true;
-      }
+    if(e.keyCode === 87 && this.player.climbing && this.player.canClimb) {
+      this.player.y += -10;
+      this.player.canClimb = false;
     }
     if (this.keys.up && !this.player.climbing){
-      this.player.y_v = 0;
+      // this.player.y_v = 0;
       this.keys.up = false;
     }
     if(e.keyCode === 83) {
       if(this.player.climbing) {
-        this.keys.down = true;
+        this.player.y += 10;
+        this.player.canClimb = false;
       }
     }
     if (this.keys.down && !this.player.climbing){
-      this.player.y_v = 0;
+      // this.player.y_v = 0;
       this.keys.down = false;
     }
 }
@@ -105,14 +105,15 @@ class Game{
         this.keys.right = false;
     }
     if(e.keyCode === 87) {
-      this.keys.up = false;
+      this.player.canClimb = true;
     }
     if(e.keyCode === 83) {
-      this.keys.down = false;
+      this.player.canClimb = true;
     }
 }
 
   loop() {
+    console.log(this.player.canClimb)
     // If the player is not jumping apply the effect of friction
     if (this.player.jump === false) {
         this.player.x_v *= this.player.friction;
@@ -130,12 +131,12 @@ class Game{
     if (this.keys.right) {
         this.player.x_v = 2.5;
     }
-    if (this.keys.up) {
-      this.player.y_v = -2.5;
-    }
-    if (this.keys.down) {
-      this.player.y_v = 2.5;
-    }
+    // if (this.keys.up) {
+    //   this.player.y_v = -1.5;
+    // }
+    // if (this.keys.down) {
+    //   this.player.y_v = 1.5;
+    // }
     // Updating the y and x coordinates of the player
     this.player.y += this.player.y_v;
     this.player.x += this.player.x_v;
@@ -167,7 +168,9 @@ class Game{
       ) {
         this.player.x = (this.level.walls[i].x + this.level.walls[i].width);
       }
-      //climbing eligibility
+    }
+    for (let i = 0; i < this.level.walls.length; i++){
+        //climbing eligibility
       if( (this.player.x === this.level.walls[i].x || this.player.x === this.level.walls[i].x + this.level.walls[i].width )
         && (this.player.y >= this.level.walls[i].y || this.player.y <= this.level.walls[i].y + this.level.walls[i].height)){
         this.player.climbing = true;
@@ -177,7 +180,10 @@ class Game{
       if(this.player.y < this.level.walls[i].y || this.player.y > this.level.walls[i].y + this.level.walls[i].height){
         this.player.climbing = false;
       }
+
     }
+    
+    
     
 
     
