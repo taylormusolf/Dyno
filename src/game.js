@@ -73,18 +73,16 @@ class Game{
         this.playerImg.src = '../src/assets/images/climber_right.png'
     }
     if(e.keyCode === 87 && this.player.climbing && this.player.canClimb) {
-      this.player.y += -10;
+      this.player.y += -15;
       this.player.canClimb = false;
     }
     if (this.keys.up && !this.player.climbing){
       // this.player.y_v = 0;
       this.keys.up = false;
     }
-    if(e.keyCode === 83) {
-      if(this.player.climbing) {
-        this.player.y += 10;
-        this.player.canClimb = false;
-      }
+    if(e.keyCode === 83 && this.player.climbing && this.player.canClimb) {
+      this.player.y += 15;
+      this.player.canClimb = false;
     }
     if (this.keys.down && !this.player.climbing){
       // this.player.y_v = 0;
