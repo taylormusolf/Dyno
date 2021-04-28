@@ -71,30 +71,38 @@ class Level{
     //   height: 729
     //   }
     // )
-    this.walls.push(
-      {
-      x: 50,
-      y: 600,
-      width: 25,
-      height: 400
-      }
-    )
-    this.walls.push(
-      {
-      x: 200,
-      y: 600,
-      width: 25,
-      height: 400
-      }
-    )
+    // this.walls.push(
+    //   {
+    //   x: 50,
+    //   y: 900,
+    //   width: 25,
+    //   height: 200
+    //   }
+    // )
+    // this.walls.push(
+    //   {
+    //   x: 200,
+    //   y: 900,
+    //   width: 25,
+    //   height: 200
+    //   }
+    // )
     this.walls.push(
       {
       x: 400,
-      y: 600,
+      y: 900,
       width: 25,
-      height: 400
+      height: 200
       }
-    ) 
+    )
+    this.walls.push(
+      {
+      x: 550,
+      y: 900,
+      width: 25,
+      height: 200
+      }
+    )  
   }
 
 }

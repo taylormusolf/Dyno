@@ -12,6 +12,7 @@ class Player{
     this.friction = 0.7;
     this.climbing = false;
     this.canClimb = true;
+    this.wallJump = true;
   }
 
 };

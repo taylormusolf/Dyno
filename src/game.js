@@ -52,7 +52,7 @@ class Game{
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.walls.length; i++){
-      this.ctx.fillRect(this.level.walls[i].x - 17, this.level.walls[i].y, this.level.walls[i].width, this.level.walls[i].height);
+      this.ctx.fillRect(this.level.walls[i].x - 17, this.level.walls[i].y, this.level.walls[i].width -7, this.level.walls[i].height);
     
     }
   }
@@ -67,6 +67,11 @@ class Game{
         if(this.player.jump === false) {
             this.player.y_v = -10;
         }
+    }
+    if(e.keyCode === 32 && this.player.climbing) {
+      if(this.player.wallJump === false) {
+          this.player.y_v = -10;
+      }
     }
     if(e.keyCode === 68) {
         this.keys.right = true;
@@ -99,6 +104,11 @@ class Game{
         this.player.y_v = -3;
         }
     }
+    // if(e.keyCode === 32 && this.player.climbing) {
+    //   if(this.player.y_v < -2) {
+    //     this.player.y_v = -3;
+    //     }
+    // }
     if(e.keyCode === 68) {
         this.keys.right = false;
     }
@@ -122,6 +132,7 @@ class Game{
         this.player.y_v += this.player.gravity;
     }
     this.player.jump = true;
+    this.player.wallJump = true;
     // If the left key is pressed increase the relevant horizontal velocity
     if (this.keys.left) {
         this.player.x_v = -2.5;
@@ -166,20 +177,17 @@ class Game{
       ) {
         this.player.x = (this.level.walls[i].x + this.level.walls[i].width);
       }
-    }
-    for (let i = 0; i < this.level.walls.length; i++){
-        //climbing eligibility
+      //climbing
       if( (this.player.x === this.level.walls[i].x || this.player.x === this.level.walls[i].x + this.level.walls[i].width )
         && (this.player.y >= this.level.walls[i].y || this.player.y <= this.level.walls[i].y + this.level.walls[i].height)){
         this.player.climbing = true;
-      } else {
+      }
+      if (this.player.climbing && (this.player.x !== this.level.walls[i].x && this.player.x !== this.level.walls[i].x + this.level.walls[i].width )
+      || (this.player.y < this.level.walls[i].y || this.player.y > this.level.walls[i].y + this.level.walls[i].height)){
         this.player.climbing = false;
       }
-      if(this.player.y < this.level.walls[i].y || this.player.y > this.level.walls[i].y + this.level.walls[i].height){
-        this.player.climbing = false;
-      }
-
     }
+
     
     
     
