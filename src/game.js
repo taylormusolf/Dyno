@@ -7,7 +7,7 @@ class Game{
     this.level = new Level();
     this.ctx = ctx;
     this.playerImg = new Image();
-    this.playerImg.src = '../src/assets/images/climber.png';
+    this.playerImg.src = '../src/assets/images/climber_right.png';
     this.keys = {
       right: false,
       left: false,
@@ -29,13 +29,30 @@ class Game{
   }
   
   renderPlayer(){
-    this.ctx.drawImage(this.playerImg, (this.player.x)-20, (this.player.y)-20, 20, 20);
+    this.ctx.drawImage(this.playerImg, (this.player.x)-40, (this.player.y)-40, 40, 40);
   }
 
-  renderPlat(){
-    this.ctx.fillStyle = "#45597E";
+  renderPlatforms(){
+    // this.ctx.fillStyle = "#45597E";
+    const img = new Image();
+    img.src = '../src/assets/images/rock_texture2.png';
+    const pattern = this.ctx.createPattern(img, 'repeat');
+    this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.platforms.length; i++){
+      // this.ctx.fillRect(this.level.platforms[i].x, this.level.platforms[i].y, this.level.platforms[i].width, this.level.platforms[i].height);
       this.ctx.fillRect(this.level.platforms[i].x, this.level.platforms[i].y, this.level.platforms[i].width, this.level.platforms[i].height);
+    
+    }
+  }
+  renderWalls(){
+    // this.ctx.fillStyle = "#45597E";
+    const img = new Image();
+    img.src = '../src/assets/images/rock_texture.png';
+    const pattern = this.ctx.createPattern(img, 'repeat');
+    this.ctx.fillStyle = pattern;
+    for(let i = 0; i < this.level.walls.length; i++){
+      this.ctx.fillRect(this.level.walls[i].x, this.level.walls[i].y, this.level.walls[i].width, this.level.walls[i].height);
+    
     }
   }
   
@@ -43,14 +60,16 @@ class Game{
   keydown(e) {
     if(e.keyCode === 37) {
         this.keys.left = true;
+        this.playerImg.src = '../src/assets/images/climber_left.png'
     }
-    if(e.keyCode === 38 || e.keyCode === 32) {
+    if(e.keyCode === 32) {
         if(this.player.jump === false) {
             this.player.y_v = -10;
         }
     }
     if(e.keyCode === 39) {
         this.keys.right = true;
+        this.playerImg.src = '../src/assets/images/climber_right.png'
     }
 }
 // This function is called when the pressed key is released
@@ -58,7 +77,7 @@ class Game{
     if(e.keyCode === 37) {
         this.keys.left = false;
     }
-    if(e.keyCode === 38 || e.keyCode === 32) {
+    if(e.keyCode === 32) {
         if(this.player.y_v < -2) {
         this.player.y_v = -3;
         }
@@ -87,11 +106,11 @@ class Game{
     // Updating the y and x coordinates of the player
     this.player.y += this.player.y_v;
     this.player.x += this.player.x_v;
-    // A simple code that checks for collions with the platform
+    // Checks for collions with the platform
 
     let falling = true;
     for (let i = 0; i < this.level.platforms.length; i++) {
-      if(this.level.platforms[i].x < this.player.x && this.player.x < this.level.platforms[i].x + this.level.platforms[i].width &&
+      if(this.level.platforms[i].x < this.player.x && this.player.x < this.level.platforms[i].x + this.level.platforms[i].width + this.player.width  &&
         this.level.platforms[i].y < this.player.y && this.player.y < this.level.platforms[i].y + this.level.platforms[i].height){
           falling = false;
           let platIndex = i;
@@ -101,12 +120,30 @@ class Game{
         }
       }  
     }
+    if(this.keys.left &&
+      (this.player.x >= this.level.walls[0].x 
+        && this.player.x + this.player.width <= this.level.walls[0].x + this.level.walls[0].width)
+        && (this.player.y >= this.level.walls[0].y 
+        && this.player.y + this.player.height <= this.level.walls[0].y + this.level.walls[0].height)
+      ){
+        this.player.x_v = 0;
+        this.player.x -=1
+    }
+    if(this.keys.right &&
+      (this.player.x <= this.level.walls[0].x 
+        && this.player.x + this.player.width >= this.level.walls[0].x + this.level.walls[0].width)
+        && (this.player.y <= this.level.walls[0].y 
+        && this.player.y + this.player.height >= this.level.walls[0].y + this.level.walls[0].height)
+      ){
+        this.player.x_v = 0;
+        this.keys.right = false;
+    }
     
 
     this.renderCanvas();
     this.renderPlayer();
-    this.renderPlat();
-    
+    this.renderPlatforms();
+    this.renderWalls();
   }
   
   
