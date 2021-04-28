@@ -34,8 +34,9 @@ class Game{
 
   renderPlat(){
     this.ctx.fillStyle = "#45597E";
-    this.ctx.fillRect(this.level.platforms[0].x, this.level.platforms[0].y, this.level.platforms[0].width, this.level.platforms[0].height);
-    this.ctx.fillRect(this.level.platforms[1].x, this.level.platforms[1].y, this.level.platforms[1].width, this.level.platforms[1].height);
+    for(let i = 0; i < this.level.platforms.length; i++){
+      this.ctx.fillRect(this.level.platforms[i].x, this.level.platforms[i].y, this.level.platforms[i].width, this.level.platforms[i].height);
+    }
   }
   
 
@@ -88,21 +89,20 @@ class Game{
     this.player.x += this.player.x_v;
     // A simple code that checks for collions with the platform
 
-    let i = -1;
-    if (this.level.platforms[0].x < this.player.x && this.player.x < this.level.platforms[0].x + this.level.platforms[0].width &&
-      this.level.platforms[0].y < this.player.y && this.player.y < this.level.platforms[0].y + this.level.platforms[0].height){
-        i = 0;
+    let falling = true;
+    for (let i = 0; i < this.level.platforms.length; i++) {
+      if(this.level.platforms[i].x < this.player.x && this.player.x < this.level.platforms[i].x + this.level.platforms[i].width &&
+        this.level.platforms[i].y < this.player.y && this.player.y < this.level.platforms[i].y + this.level.platforms[i].height){
+          falling = false;
+          let platIndex = i;
+        if (!falling){
+          this.player.jump = false;
+          this.player.y = this.level.platforms[platIndex].y; 
+        }
+      }  
     }
-    if( this.level.platforms[1].x < this.player.x && this.player.x < this.level.platforms[1].x + this.level.platforms[1].width &&
-      this.level.platforms[1].y < this.player.y && this.player.y < this.level.platforms[1].y + this.level.platforms[1].height){
-        i = 1;
-    }
-    if (i > -1){
-      this.player.jump = false;
-      this.player.y = this.level.platforms[i].y;    
-    }
+    
 
-    // Rendering the canvas, the player and the platforms
     this.renderCanvas();
     this.renderPlayer();
     this.renderPlat();

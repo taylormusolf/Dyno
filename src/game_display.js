@@ -9,7 +9,7 @@ class GameDisplay {
 
 
   start() {
-    this.game.keyListeners();
+    this.game.keyListeners(); 
     setInterval(() => {
       this.game.loop();
     }, 22)

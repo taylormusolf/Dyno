@@ -15,13 +15,29 @@ class Level{
     for(let i = 0; i < this.numPlatforms; i++) {
         this.platforms.push(
             {
-            x: 100 * i,
-            y: 200 + (30 * i),
+            x: 1000 * i,
+            y: 900 + (30 * i),
             width: 110,
             height: 20
             }
         );
     }
+    this.platforms.push(
+      {
+        x: 0,
+        y: 950,
+        width: 1500,
+        height: 50
+      }
+    )
+    this.platforms.push(
+      {
+        x: 0,
+        y: 0,
+        width: 1500,
+        height: 50
+      }
+    )
   }
 
 }
