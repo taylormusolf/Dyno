@@ -7,7 +7,7 @@ class Game{
     this.level = new Level();
     this.ctx = ctx;
     this.playerImg = new Image();
-    this.playerImg.src = '../src/assets/images/climber_right.png';
+    this.playerImg.src = './src/assets/images/climber_right.png';
     this.keys = {
       right: false,
       left: false,
@@ -25,7 +25,7 @@ class Game{
   
   renderCanvas(){
     const img = new Image();
-    img.src = '../src/assets/images/cave.jpg'
+    img.src = './src/assets/images/cave.jpg'
     this.ctx.drawImage(img, 0, 0, 1500, 1000);
   }
   
@@ -36,7 +36,7 @@ class Game{
   renderPlatforms(){
     // this.ctx.fillStyle = "#45597E";
     const img = new Image();
-    img.src = '../src/assets/images/rock_texture2.png';
+    img.src = './src/assets/images/rock_texture2.png';
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.platforms.length; i++){
@@ -48,7 +48,7 @@ class Game{
   renderWalls(){
     // this.ctx.fillStyle = "#45597E";
     const img = new Image();
-    img.src = '../src/assets/images/rock_texture.png';
+    img.src = './src/assets/images/rock_texture.png';
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.walls.length; i++){
@@ -61,7 +61,7 @@ class Game{
   keydown(e) {
     if(e.keyCode === 65) {
         this.keys.left = true;
-        this.playerImg.src = '../src/assets/images/climber_left.png'
+        this.playerImg.src = './src/assets/images/climber_left.png'
     }
     if(e.keyCode === 32) {
         if(this.player.jump === false) {
@@ -70,7 +70,7 @@ class Game{
     }
     if(e.keyCode === 68) {
         this.keys.right = true;
-        this.playerImg.src = '../src/assets/images/climber_right.png'
+        this.playerImg.src = './src/assets/images/climber_right.png'
     }
     if(e.keyCode === 87 && this.player.climbing && this.player.canClimb) {
       this.player.y += -15;
