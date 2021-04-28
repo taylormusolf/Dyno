@@ -34,14 +34,14 @@ class Level{
     //   height: 20
     //   }
     // )
-    // this.platforms.push(
-    //   {
-    //   x: 1400,
-    //   y: 200,
-    //   width: 100,
-    //   height: 20
-    //   }
-    // )  
+    this.platforms.push(
+      {
+      x: 385,
+      y: 200,
+      width: 100,
+      height: 20
+      }
+    )  
     //floor
     this.platforms.push(
       {
@@ -73,7 +73,7 @@ class Level{
     // )
     this.walls.push(
       {
-      x: 200,
+      x: 250,
       y: 221,
       width: 25,
       height: 729
@@ -87,6 +87,14 @@ class Level{
       height: 729
       }
     )  
+    this.walls.push(
+      {
+      x: 400,
+      y: 221,
+      width: 25,
+      height: 729
+      }
+    ) 
   }
 
 }

@@ -52,7 +52,7 @@ class Game{
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.walls.length; i++){
-      this.ctx.fillRect(this.level.walls[i].x, this.level.walls[i].y, this.level.walls[i].width, this.level.walls[i].height);
+      this.ctx.fillRect(this.level.walls[i].x - 17, this.level.walls[i].y, this.level.walls[i].width, this.level.walls[i].height);
     
     }
   }
@@ -77,10 +77,18 @@ class Game{
         this.keys.up = true;
       }
     }
+    if (this.keys.up && !this.player.climbing){
+      this.player.y_v = 0;
+      this.keys.up = false;
+    }
     if(e.keyCode === 83) {
       if(this.player.climbing) {
         this.keys.down = true;
       }
+    }
+    if (this.keys.down && !this.player.climbing){
+      this.player.y_v = 0;
+      this.keys.down = false;
     }
 }
 // This function is called when the pressed key is released
@@ -145,37 +153,32 @@ class Game{
         }
       }  
     }
-    // if(this.keys.left &&
-    //   (this.player.x >= this.level.walls[0].x 
-    //     && this.player.x + this.player.width <= this.level.walls[0].x + this.level.walls[0].width)
-    //     && (this.player.y >= this.level.walls[0].y 
-    //     && this.player.y + this.player.height <= this.level.walls[0].y + this.level.walls[0].height)
-    //   ){
-    //     this.player.x_v = 0;
-    //     this.player.x -=1
-    // }
+ 
     for (let i = 0; i < this.level.walls.length; i++){
       //left side of wall
       if( this.player.x >= this.level.walls[i].x && this.player.x + this.player.width < this.level.walls[i].x + this.level.walls[i].width
-        && (this.player.y >= this.level.walls[i].y || this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
+        && (this.player.y > this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
         ){
         this.player.x = this.level.walls[i].x;
       }
       //right side of wall
       if( this.player.x > this.level.walls[i].x && this.player.x <= this.level.walls[i].x + this.level.walls[i].width
-        && (this.player.y >= this.level.walls[i].y || this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
+        && (this.player.y > this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
       ) {
         this.player.x = (this.level.walls[i].x + this.level.walls[i].width);
       }
       //climbing eligibility
-      if( this.player.x === this.level.walls[i].x || this.player.x === this.level.walls[i].x + this.level.walls[i].width ){
+      if( (this.player.x === this.level.walls[i].x || this.player.x === this.level.walls[i].x + this.level.walls[i].width )
+        && (this.player.y >= this.level.walls[i].y || this.player.y <= this.level.walls[i].y + this.level.walls[i].height)){
         this.player.climbing = true;
       } else {
         this.player.climbing = false;
       }
+      if(this.player.y < this.level.walls[i].y || this.player.y > this.level.walls[i].y + this.level.walls[i].height){
+        this.player.climbing = false;
+      }
     }
-
-
+    
 
     
     
