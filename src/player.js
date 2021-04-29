@@ -11,8 +11,10 @@ class Player{
     this.gravity = 0.6;
     this.friction = 0.7;
     this.climbing = false;
+    this.climbingWallIdx = null;
     this.canClimb = true;
     this.wallJump = true;
+    this.facing = 'right';
   }
 
 };

@@ -61,21 +61,37 @@ class Game{
   keydown(e) {
     if(e.keyCode === 65) {
         this.keys.left = true;
-        this.playerImg.src = '../src/assets/images/climber_left.png'
+        this.player.facing = 'left';
     }
     if(e.keyCode === 32) {
         if(this.player.jump === false) {
             this.player.y_v = -10;
         }
     }
-    if(e.keyCode === 32 && this.player.climbing) {
-      if(this.player.wallJump === false) {
-          this.player.y_v = -10;
+
+    if(e.keyCode === 32 && this.player.climbing && this.player.facing === 'right') {
+      if(this.player.wallJump === true) {
+          this.player.y += -40;
+          this.player.x += -50;
+          this.player.x_v = -3;
+          this.player.y_v = -5;
+          this.player.facing = 'left';
+          
+      }
+    } else if(e.keyCode === 32 && this.player.climbing && this.player.facing === 'left'){
+      if(this.player.wallJump === true) {
+        this.player.y -= 40;
+        this.player.x += 50;
+        this.player.x_v = 3;
+        this.player.y_v = -5;
+        this.player.facing = 'right';
+        
       }
     }
+
     if(e.keyCode === 68) {
         this.keys.right = true;
-        this.playerImg.src = '../src/assets/images/climber_right.png'
+        this.player.facing = 'right';
     }
     if(e.keyCode === 87 && this.player.climbing && this.player.canClimb) {
       this.player.y += -15;
@@ -104,11 +120,6 @@ class Game{
         this.player.y_v = -3;
         }
     }
-    // if(e.keyCode === 32 && this.player.climbing) {
-    //   if(this.player.y_v < -2) {
-    //     this.player.y_v = -3;
-    //     }
-    // }
     if(e.keyCode === 68) {
         this.keys.right = false;
     }
@@ -121,7 +132,11 @@ class Game{
 }
 
   loop() {
-    console.log(this.player.canClimb)
+    if (this.player.facing === 'right'){
+      this.playerImg.src = '../src/assets/images/climber_right.png';
+    } else {
+      this.playerImg.src = '../src/assets/images/climber_left.png';
+    }
     // If the player is not jumping apply the effect of friction
     if (this.player.jump === false) {
         this.player.x_v *= this.player.friction;
@@ -140,12 +155,7 @@ class Game{
     if (this.keys.right) {
         this.player.x_v = 2.5;
     }
-    // if (this.keys.up) {
-    //   this.player.y_v = -1.5;
-    // }
-    // if (this.keys.down) {
-    //   this.player.y_v = 1.5;
-    // }
+
     // Updating the y and x coordinates of the player
     this.player.y += this.player.y_v;
     this.player.x += this.player.x_v;
@@ -179,15 +189,27 @@ class Game{
       }
       //climbing
       if( (this.player.x === this.level.walls[i].x || this.player.x === this.level.walls[i].x + this.level.walls[i].width )
-        && (this.player.y >= this.level.walls[i].y || this.player.y <= this.level.walls[i].y + this.level.walls[i].height)){
+        && (this.player.y >= this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)){
         this.player.climbing = true;
-      }
-      if (this.player.climbing && (this.player.x !== this.level.walls[i].x && this.player.x !== this.level.walls[i].x + this.level.walls[i].width )
-      || (this.player.y < this.level.walls[i].y || this.player.y > this.level.walls[i].y + this.level.walls[i].height)){
-        this.player.climbing = false;
+        this.player.climbingWallIdx = i;
+        this.player.x_v = 0;
+        // if((this.player.x !== this.level.walls[i].x && this.player.x !== this.level.walls[i].x + this.level.walls[i].width )
+        // || (this.player.y < this.level.walls[i].y || this.player.y > this.level.walls[i].y + this.level.walls[i].height)){
+        //  this.player.climbing = false 
+        // }
       }
     }
-
+    if(this.player.climbing){
+      if(
+      (this.player.x !== this.level.walls[this.player.climbingWallIdx].x 
+      && this.player.x !== this.level.walls[this.player.climbingWallIdx].x + this.level.walls[this.player.climbingWallIdx].width)
+      || (this.player.y < this.level.walls[this.player.climbingWallIdx].y 
+      || this.player.y > this.level.walls[this.player.climbingWallIdx].y + this.level.walls[this.player.climbingWallIdx].height))
+      {
+      this.player.climbing = false;
+      this.player.climbingWallIdx = null;
+      }
+    }
     
     
     
