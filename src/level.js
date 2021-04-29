@@ -63,30 +63,30 @@ class Level{
   }
 
   createWalls(){
-    // this.walls.push(
-    //   {
-    //   x: 1400,
-    //   y: 221,
-    //   width: 100,
-    //   height: 729
-    //   }
-    // )
-    // this.walls.push(
-    //   {
-    //   x: 50,
-    //   y: 900,
-    //   width: 25,
-    //   height: 200
-    //   }
-    // )
-    // this.walls.push(
-    //   {
-    //   x: 200,
-    //   y: 900,
-    //   width: 25,
-    //   height: 200
-    //   }
-    // )
+    this.walls.push(
+      {
+      x: 1400,
+      y: 221,
+      width: 100,
+      height: 729
+      }
+    )
+    this.walls.push(
+      {
+      x: 50,
+      y: 900,
+      width: 25,
+      height: 200
+      }
+    )
+    this.walls.push(
+      {
+      x: 200,
+      y: 900,
+      width: 25,
+      height: 200
+      }
+    )
     this.walls.push(
       {
       x: 400,

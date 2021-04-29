@@ -109,7 +109,7 @@ class Game{
       // this.player.y_v = 0;
       this.keys.down = false;
     }
-}
+  }
 // This function is called when the pressed key is released
   keyup(e) {
     if(e.keyCode === 65) {
@@ -129,7 +129,10 @@ class Game{
     if(e.keyCode === 83) {
       this.player.canClimb = true;
     }
-}
+  }
+  gameOver(){
+    this.player.x > 1500 || this.player.x < 0 || this.player.y < 0 || this.player.y > 1000  
+  }
 
   loop() {
     if (this.player.facing === 'right'){
@@ -193,10 +196,6 @@ class Game{
         this.player.climbing = true;
         this.player.climbingWallIdx = i;
         this.player.x_v = 0;
-        // if((this.player.x !== this.level.walls[i].x && this.player.x !== this.level.walls[i].x + this.level.walls[i].width )
-        // || (this.player.y < this.level.walls[i].y || this.player.y > this.level.walls[i].y + this.level.walls[i].height)){
-        //  this.player.climbing = false 
-        // }
       }
     }
     if(this.player.climbing){
@@ -212,16 +211,13 @@ class Game{
     }
     
     
-    
-
-    
-    
 
     this.renderCanvas();
     this.renderPlayer();
     this.renderPlatforms();
     this.renderWalls();
   }
+  
   
   
 

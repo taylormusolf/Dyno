@@ -1,4 +1,3 @@
-// The attributes of the player.
 class Player{
   constructor(){
     this.x = 300;

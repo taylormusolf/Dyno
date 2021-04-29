@@ -1,6 +1,5 @@
 const Game = require('./game')
 
-
 class GameDisplay {
   constructor(ctx){
     this.game = new Game(ctx);
@@ -10,15 +9,18 @@ class GameDisplay {
 
   start() {
     this.game.keyListeners(); 
-    setInterval(() => {
+    const gameLoop = setInterval(() => {
       this.game.loop();
     }, 22)
+    if (this.game.gameOver()){
+      clearInterval(gameLoop);
+      this.start();
+    }
   };
 
+  
 
 }
-
-
 
 
 
