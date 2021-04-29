@@ -22,6 +22,13 @@ class Game{
     document.addEventListener("keydown", this.keydown);
     document.addEventListener("keyup", this.keyup);
   }
+  removeKeyListeners(){
+    document.removeEventListener("keydown", this.keydown);
+    document.removeEventListener("keyup", this.keyup);
+  }
+  gameOverCheck(){
+    this.player.x > 1500 || this.player.x < 0 || this.player.y < 0 || this.player.y > 1000  
+  }
   
   renderCanvas(){
     const img = new Image();
@@ -130,9 +137,7 @@ class Game{
       this.player.canClimb = true;
     }
   }
-  gameOver(){
-    this.player.x > 1500 || this.player.x < 0 || this.player.y < 0 || this.player.y > 1000  
-  }
+  
 
   loop() {
     if (this.player.facing === 'right'){
