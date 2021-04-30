@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const audioPause = document.getElementById('audio-pause');
   const menu = document.getElementById('menu');
   const logo = document.getElementById('logo');
+  // const smallLogo = document.getElementById('small-logo')
   const controls = document.getElementById('controls')
 
   playButton.addEventListener('click', () => {
@@ -23,7 +24,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     menu.classList.add('hidden');
     logo.classList.add('hidden');
     playButton.classList.add('hidden');
-    controls.classList.remove('hidden')
+    // smallLogo.classList.remove('hidden');
+    controls.classList.remove('hidden');
   })
   
 
