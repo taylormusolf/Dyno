@@ -26,9 +26,6 @@ class Game{
     document.removeEventListener("keydown", this.keydown);
     document.removeEventListener("keyup", this.keyup);
   }
-  // gameOverCheck(){
-  //   this.player.x > 1500 || this.player.x < 0 || this.player.y < 0 || this.player.y > 1000  
-  // }
   
   renderCanvas(){
     const img = new Image();
@@ -153,9 +150,9 @@ class Game{
   loop() {
     // changes direction of player image based on which way they are facing
     if (this.player.facing === 'right'){
-      this.playerImg.src = '../src/assets/images/climber_right.png';
+      this.playerImg.src = './src/assets/images/climber_right.png';
     } else {
-      this.playerImg.src = '../src/assets/images/climber_left.png';
+      this.playerImg.src = './src/assets/images/climber_left.png';
     }
     // If the player is not jumping apply the effect of friction
     if (this.player.jump === false) {
