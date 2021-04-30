@@ -1,7 +1,7 @@
 class Player{
   constructor(){
-    this.x = 300;
-    this.y = 900;
+    this.x = 30;
+    this.y = 940;
     this.x_v = 0;
     this.y_v = 0;
     this.jump = true;

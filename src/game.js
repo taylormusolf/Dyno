@@ -26,9 +26,9 @@ class Game{
     document.removeEventListener("keydown", this.keydown);
     document.removeEventListener("keyup", this.keyup);
   }
-  gameOverCheck(){
-    this.player.x > 1500 || this.player.x < 0 || this.player.y < 0 || this.player.y > 1000  
-  }
+  // gameOverCheck(){
+  //   this.player.x > 1500 || this.player.x < 0 || this.player.y < 0 || this.player.y > 1000  
+  // }
   
   renderCanvas(){
     const img = new Image();
@@ -60,6 +60,17 @@ class Game{
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.walls.length; i++){
       this.ctx.fillRect(this.level.walls[i].x - 17, this.level.walls[i].y, this.level.walls[i].width -7, this.level.walls[i].height);
+    
+    }
+  }
+  renderUnclimbableWalls(){
+    this.ctx.fillStyle = "#45597E";
+    // const img = new Image();
+    // img.src = '../src/assets/images/rock_texture.png';
+    // const pattern = this.ctx.createPattern(img, 'repeat');
+    // this.ctx.fillStyle = pattern;
+    for(let i = 0; i < this.level.unclimbableWalls.length; i++){
+      this.ctx.fillRect(this.level.unclimbableWalls[i].x - 17, this.level.unclimbableWalls[i].y, this.level.unclimbableWalls[i].width -7, this.level.unclimbableWalls[i].height);
     
     }
   }
@@ -140,6 +151,7 @@ class Game{
   
 
   loop() {
+    // changes direction of player image based on which way they are facing
     if (this.player.facing === 'right'){
       this.playerImg.src = '../src/assets/images/climber_right.png';
     } else {
@@ -203,6 +215,23 @@ class Game{
         this.player.x_v = 0;
       }
     }
+
+    for (let i = 0; i < this.level.unclimbableWalls.length; i++){
+      //left side of wall
+      if( this.player.x >= this.level.unclimbableWalls[i].x && this.player.x + this.player.width < this.level.unclimbableWalls[i].x + this.level.unclimbableWalls[i].width
+        && (this.player.y > this.level.unclimbableWalls[i].y && this.player.y <= this.level.unclimbableWalls[i].y + this.level.unclimbableWalls[i].height)
+        ){
+        this.player.x = this.level.unclimbableWalls[i].x;
+      }
+      //right side of wall
+      if( this.player.x > this.level.unclimbableWalls[i].x && this.player.x <= this.level.unclimbableWalls[i].x + this.level.unclimbableWalls[i].width
+        && (this.player.y > this.level.unclimbableWalls[i].y && this.player.y <= this.level.unclimbableWalls[i].y + this.level.unclimbableWalls[i].height)
+      ) {
+        this.player.x = (this.level.unclimbableWalls[i].x + this.level.unclimbableWalls[i].width);
+      }
+    }
+
+
     if(this.player.climbing){
       if(
       (this.player.x !== this.level.walls[this.player.climbingWallIdx].x 
@@ -214,13 +243,18 @@ class Game{
       this.player.climbingWallIdx = null;
       }
     }
-    
+    //falling in a pit
+    if(this.player.y > 1100 || this.player.x < 0){
+      this.player.x = 30;
+      this.player.y = 940;
+    }
     
 
     this.renderCanvas();
     this.renderPlayer();
     this.renderPlatforms();
     this.renderWalls();
+    this.renderUnclimbableWalls();
   }
   
   

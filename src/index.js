@@ -27,7 +27,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
     // smallLogo.classList.remove('hidden');
     controls.classList.remove('hidden');
   })
-  
+  //for testing
+    // menu.classList.add('hidden');
+    // logo.classList.add('hidden');
+    // playButton.classList.add('hidden');
+    // controls.classList.remove('hidden');
+    // canvas.width = 1500;
+    // canvas.height = 1000;
+    // const newGame = new GameDisplay(ctx);
+    // newGame.start();
+  //for testing
 
   audioControls.addEventListener('click', () => {
     if (!audio.paused) {

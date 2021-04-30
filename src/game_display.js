@@ -34,15 +34,15 @@ class GameDisplay {
     this.restart();
   }
   
-  showGame() {
-    let gameOver = document.getElementsByClassName('game-over')[0];
-    gameOver.classList.remove('hidden');
-    const gameContainer = document.getElementsByClassName('game-container')[0];
-    gameContainer.classList.remove('game-container');
-    gameContainer.classList.add('game-container-active');
-    const notGameElements = document.getElementsByClassName('not-game');
-    Array.from(notGameElements).forEach((ele) => ele.classList.add('hidden'));
-  }
+  // showGame() {
+  //   let gameOver = document.getElementsByClassName('game-over')[0];
+  //   gameOver.classList.remove('hidden');
+  //   const gameContainer = document.getElementsByClassName('game-container')[0];
+  //   gameContainer.classList.remove('game-container');
+  //   gameContainer.classList.add('game-container-active');
+  //   const notGameElements = document.getElementsByClassName('not-game');
+  //   Array.from(notGameElements).forEach((ele) => ele.classList.add('hidden'));
+  // }
 
 
 
