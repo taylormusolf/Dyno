@@ -22,6 +22,13 @@ class Game{
     document.addEventListener("keydown", this.keydown);
     document.addEventListener("keyup", this.keyup);
   }
+  removeKeyListeners(){
+    document.removeEventListener("keydown", this.keydown);
+    document.removeEventListener("keyup", this.keyup);
+  }
+  // gameOverCheck(){
+  //   this.player.x > 1500 || this.player.x < 0 || this.player.y < 0 || this.player.y > 1000  
+  // }
   
   renderCanvas(){
     const img = new Image();
@@ -52,7 +59,18 @@ class Game{
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.walls.length; i++){
-      this.ctx.fillRect(this.level.walls[i].x - 17, this.level.walls[i].y, this.level.walls[i].width, this.level.walls[i].height);
+      this.ctx.fillRect(this.level.walls[i].x - 17, this.level.walls[i].y, this.level.walls[i].width -7, this.level.walls[i].height);
+    
+    }
+  }
+  renderUnclimbableWalls(){
+    this.ctx.fillStyle = "#45597E";
+    // const img = new Image();
+    // img.src = '../src/assets/images/rock_texture.png';
+    // const pattern = this.ctx.createPattern(img, 'repeat');
+    // this.ctx.fillStyle = pattern;
+    for(let i = 0; i < this.level.unclimbableWalls.length; i++){
+      this.ctx.fillRect(this.level.unclimbableWalls[i].x - 17, this.level.unclimbableWalls[i].y, this.level.unclimbableWalls[i].width -7, this.level.unclimbableWalls[i].height);
     
     }
   }
@@ -61,16 +79,37 @@ class Game{
   keydown(e) {
     if(e.keyCode === 65) {
         this.keys.left = true;
-        this.playerImg.src = './src/assets/images/climber_left.png'
+        this.player.facing = 'left';
     }
     if(e.keyCode === 32) {
         if(this.player.jump === false) {
             this.player.y_v = -10;
         }
     }
+
+    if(e.keyCode === 32 && this.player.climbing && this.player.facing === 'right') {
+      if(this.player.wallJump === true) {
+          this.player.y += -40;
+          this.player.x += -50;
+          this.player.x_v = -3;
+          this.player.y_v = -5;
+          this.player.facing = 'left';
+          
+      }
+    } else if(e.keyCode === 32 && this.player.climbing && this.player.facing === 'left'){
+      if(this.player.wallJump === true) {
+        this.player.y -= 40;
+        this.player.x += 50;
+        this.player.x_v = 3;
+        this.player.y_v = -5;
+        this.player.facing = 'right';
+        
+      }
+    }
+
     if(e.keyCode === 68) {
         this.keys.right = true;
-        this.playerImg.src = './src/assets/images/climber_right.png'
+        this.player.facing = 'right';
     }
     if(e.keyCode === 87 && this.player.climbing && this.player.canClimb) {
       this.player.y += -15;
@@ -88,7 +127,7 @@ class Game{
       // this.player.y_v = 0;
       this.keys.down = false;
     }
-}
+  }
 // This function is called when the pressed key is released
   keyup(e) {
     if(e.keyCode === 65) {
@@ -108,10 +147,16 @@ class Game{
     if(e.keyCode === 83) {
       this.player.canClimb = true;
     }
-}
+  }
+  
 
   loop() {
-    console.log(this.player.canClimb)
+    // changes direction of player image based on which way they are facing
+    if (this.player.facing === 'right'){
+      this.playerImg.src = '../src/assets/images/climber_right.png';
+    } else {
+      this.playerImg.src = '../src/assets/images/climber_left.png';
+    }
     // If the player is not jumping apply the effect of friction
     if (this.player.jump === false) {
         this.player.x_v *= this.player.friction;
@@ -122,6 +167,7 @@ class Game{
         this.player.y_v += this.player.gravity;
     }
     this.player.jump = true;
+    this.player.wallJump = true;
     // If the left key is pressed increase the relevant horizontal velocity
     if (this.keys.left) {
         this.player.x_v = -2.5;
@@ -129,12 +175,7 @@ class Game{
     if (this.keys.right) {
         this.player.x_v = 2.5;
     }
-    // if (this.keys.up) {
-    //   this.player.y_v = -1.5;
-    // }
-    // if (this.keys.down) {
-    //   this.player.y_v = 1.5;
-    // }
+
     // Updating the y and x coordinates of the player
     this.player.y += this.player.y_v;
     this.player.x += this.player.x_v;
@@ -166,32 +207,56 @@ class Game{
       ) {
         this.player.x = (this.level.walls[i].x + this.level.walls[i].width);
       }
-    }
-    for (let i = 0; i < this.level.walls.length; i++){
-        //climbing eligibility
+      //climbing
       if( (this.player.x === this.level.walls[i].x || this.player.x === this.level.walls[i].x + this.level.walls[i].width )
-        && (this.player.y >= this.level.walls[i].y || this.player.y <= this.level.walls[i].y + this.level.walls[i].height)){
+        && (this.player.y >= this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)){
         this.player.climbing = true;
-      } else {
-        this.player.climbing = false;
+        this.player.climbingWallIdx = i;
+        this.player.x_v = 0;
       }
-      if(this.player.y < this.level.walls[i].y || this.player.y > this.level.walls[i].y + this.level.walls[i].height){
-        this.player.climbing = false;
-      }
-
     }
-    
-    
-    
 
-    
+    for (let i = 0; i < this.level.unclimbableWalls.length; i++){
+      //left side of wall
+      if( this.player.x >= this.level.unclimbableWalls[i].x && this.player.x + this.player.width < this.level.unclimbableWalls[i].x + this.level.unclimbableWalls[i].width
+        && (this.player.y > this.level.unclimbableWalls[i].y && this.player.y <= this.level.unclimbableWalls[i].y + this.level.unclimbableWalls[i].height)
+        ){
+        this.player.x = this.level.unclimbableWalls[i].x;
+      }
+      //right side of wall
+      if( this.player.x > this.level.unclimbableWalls[i].x && this.player.x <= this.level.unclimbableWalls[i].x + this.level.unclimbableWalls[i].width
+        && (this.player.y > this.level.unclimbableWalls[i].y && this.player.y <= this.level.unclimbableWalls[i].y + this.level.unclimbableWalls[i].height)
+      ) {
+        this.player.x = (this.level.unclimbableWalls[i].x + this.level.unclimbableWalls[i].width);
+      }
+    }
+
+
+    if(this.player.climbing){
+      if(
+      (this.player.x !== this.level.walls[this.player.climbingWallIdx].x 
+      && this.player.x !== this.level.walls[this.player.climbingWallIdx].x + this.level.walls[this.player.climbingWallIdx].width)
+      || (this.player.y < this.level.walls[this.player.climbingWallIdx].y 
+      || this.player.y > this.level.walls[this.player.climbingWallIdx].y + this.level.walls[this.player.climbingWallIdx].height))
+      {
+      this.player.climbing = false;
+      this.player.climbingWallIdx = null;
+      }
+    }
+    //falling in a pit
+    if(this.player.y > 1100 || this.player.x < 0){
+      this.player.x = 30;
+      this.player.y = 940;
+    }
     
 
     this.renderCanvas();
     this.renderPlayer();
     this.renderPlatforms();
     this.renderWalls();
+    this.renderUnclimbableWalls();
   }
+  
   
   
 
