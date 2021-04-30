@@ -43,7 +43,7 @@ class Game{
   renderPlatforms(){
     // this.ctx.fillStyle = "#45597E";
     const img = new Image();
-    img.src = '../src/assets/images/rock_texture2.png';
+    img.src = '../src/assets/images/white_rock.png';
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.platforms.length; i++){
@@ -55,7 +55,7 @@ class Game{
   renderWalls(){
     // this.ctx.fillStyle = "#45597E";
     const img = new Image();
-    img.src = '../src/assets/images/rock_texture.png';
+    img.src = '../src/assets/images/blue_rock.png';
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.walls.length; i++){
@@ -64,11 +64,11 @@ class Game{
     }
   }
   renderUnclimbableWalls(){
-    this.ctx.fillStyle = "#45597E";
-    // const img = new Image();
-    // img.src = '../src/assets/images/rock_texture.png';
-    // const pattern = this.ctx.createPattern(img, 'repeat');
-    // this.ctx.fillStyle = pattern;
+    // this.ctx.fillStyle = "#45597E";
+    const img = new Image();
+    img.src = '../src/assets/images/blue_rock.png';
+    const pattern = this.ctx.createPattern(img, 'repeat');
+    this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.unclimbableWalls.length; i++){
       this.ctx.fillRect(this.level.unclimbableWalls[i].x - 17, this.level.unclimbableWalls[i].y, this.level.unclimbableWalls[i].width -7, this.level.unclimbableWalls[i].height);
     

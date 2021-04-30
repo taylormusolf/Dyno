@@ -121,8 +121,12 @@ class Level{
         height: 50
       }
     )
+    
+  }
+
+  createWalls(){
     //ceiling
-    this.platforms.push(
+    this.walls.push(
       {
         x: 0,
         y: 0,
@@ -130,9 +134,6 @@ class Level{
         height: 50
       }
     )
-  }
-
-  createWalls(){
     //far right wall
     this.walls.push(
       {
