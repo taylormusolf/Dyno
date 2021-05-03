@@ -11,28 +11,33 @@ class GameDisplay {
     this.game.keyListeners(); 
     let gameLoop = setInterval(() => {
       this.game.loop();
-      // if(this.game.gameOverCheck()){
-      //   this.restart();
-      //   clearInterval(gameLoop);
-      //   return
-      // }
+      if(this.gameOver()){
+        clearInterval(gameLoop);
+        const canvas = document.getElementById("canvas");
+        const controls = document.getElementById('controls');
+        const playButton = document.getElementById('play-button');
+        const moreLevels = document.getElementById('more-levels');
+        canvas.classList.add('hidden');
+        playButton.classList.remove('hidden');
+        moreLevels.classList.remove('hidden');
+        controls.classList.add('hidden');
+        this.game.removeKeyListeners();
+      }
     }, 22)
   }
 
   // restart(){
-  //   let gameOver = document.getElementsByClassName('game-over')[0]
-  //   let cont = document.getElementsByClassName('cont')[0];
   //   this.newGame();
   //   this.game.keyListeners();
-  //   gameOver.classList.add('hidden');
-  //   cont.classList.add('hidden');
-  //   cont.classList.add('animate-fade');
   // }
 
-  // gameOver(){
-  //   this.game.removeKeyListeners();
-  //   this.restart();
-  // }
+  gameOver(){
+    if(this.game.levelOver()){
+    return true
+    } else {
+    return false
+    }
+  }
 
 
 

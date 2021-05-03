@@ -1,4 +1,4 @@
-console.log("Webpack is working!")
+// console.log("Webpack is working!")
 
 const GameDisplay = require("./game_display");
 
@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const audioPause = document.getElementById('audio-pause');
   const menu = document.getElementById('menu');
   const logo = document.getElementById('logo');
-  // const smallLogo = document.getElementById('small-logo')
-  const controls = document.getElementById('controls')
+  const controls = document.getElementById('controls');
+  const moreLevels = document.getElementById('more-levels');
 
   playButton.addEventListener('click', () => {
     canvas.width = 1500;
@@ -23,15 +23,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
     newGame.start();
     menu.classList.add('hidden');
     logo.classList.add('hidden');
+    canvas.classList.remove('hidden')
     playButton.classList.add('hidden');
-    // smallLogo.classList.remove('hidden');
     controls.classList.remove('hidden');
+    moreLevels.classList.add('hidden');
+    
   })
   //for testing
     // menu.classList.add('hidden');
     // logo.classList.add('hidden');
     // playButton.classList.add('hidden');
     // controls.classList.remove('hidden');
+    // moreLevels.classList.add('hidden');
     // canvas.width = 1500;
     // canvas.height = 1000;
     // const newGame = new GameDisplay(ctx);

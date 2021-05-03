@@ -2,6 +2,10 @@ class Player{
   constructor(){
     this.x = 30;
     this.y = 940;
+    //testing
+    // this.x = 1450;
+    // this.y = 120;
+    //testing
     this.x_v = 0;
     this.y_v = 0;
     this.jump = true;
@@ -14,6 +18,7 @@ class Player{
     this.canClimb = true;
     this.wallJump = true;
     this.facing = 'right';
+    // this.hasRope = false;
   }
 
 };

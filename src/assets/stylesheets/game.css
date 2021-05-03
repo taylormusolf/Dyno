@@ -62,10 +62,10 @@ body {
   display: none;
 }
 
-.stop-scrolling {
+/* .stop-scrolling {
 height: 100%;
 overflow: hidden;
-}
+} */
 
 .canvas-container {
   margin: 0 auto;
@@ -74,10 +74,7 @@ overflow: hidden;
 
 .game-container-active {
   margin: 0 auto;
-  transform: scaleX(1);
   position: relative;
-  width: 704px;
-  transition: transform 250ms ease-in-out;
 }
 
 /* canvas {
@@ -113,7 +110,7 @@ li:hover {
 .game-text{
   display: flex;
   justify-content: space-around;
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 .game-text h1{
@@ -123,6 +120,11 @@ li:hover {
 
 .active::after {
   transform: scaleX(1);
+}
+
+.more-levels{
+  margin: auto;
+  font-size: 50px;
 }
 
 .instructions {
@@ -159,7 +161,7 @@ li:hover {
   width: 600px;
   height: 40vh;
   padding: 0 4vw;
-  margin-top: 8vh;
+  margin-top: 5vh;
   margin-bottom: 5vh;
   position: relative;
 }
@@ -194,5 +196,9 @@ button:hover {
   width: 1300px;
 }
 
-
+.credit{
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 30px;
+}
 
