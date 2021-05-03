@@ -47,6 +47,6 @@ The goal is to reach the exit and find items.
  * Day 4: Add level variation and finish styling
 
 ## Credits
- Music credit goes to Kai Engel for "Moonlight Reprise" found on Free Music Archive
- Image assets came from Canva
+ * Music credit goes to Kai Engel for "Moonlight Reprise" found on Free Music Archive
+ * Image assets came from Canva
 
