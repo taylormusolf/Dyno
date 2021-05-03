@@ -16,7 +16,8 @@ The goal is to reach the exit and find items.
  ### Bonus / Future add-ons
  1. Player can collect 'memento' objects scattered around environment and they are added to their inventory
  2. Player can go into new environments or levels after reaching exit of current level
- 3. Player can use a rope to dynamically move around
+ 3. Sprite update for player animations
+ 4. Player can use a rope to dynamically move around
 
 ## Start Screen
  The game has a start screen which includes story background and general level objective.  
