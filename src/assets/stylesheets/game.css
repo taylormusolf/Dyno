@@ -58,14 +58,12 @@ body {
   padding: 0px 10px;
 }
 
-.hidden {
-  display: none;
-}
 
-/* .stop-scrolling {
+
+.stop-scrolling {
 height: 100%;
 overflow: hidden;
-} */
+}
 
 .canvas-container {
   margin: 0 auto;
@@ -189,7 +187,7 @@ button:hover {
   cursor: pointer;
 }
 
-#controls{
+.controls{
   margin-top: 20px;
   display: flex;
   justify-content: space-between;
@@ -201,4 +199,6 @@ button:hover {
   text-align: center;
   margin-bottom: 30px;
 }
-
+.hidden {
+  display: none;
+}
