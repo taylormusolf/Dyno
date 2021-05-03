@@ -1,8 +1,6 @@
 class Level{
   constructor(){
-    // this.BG_COLOR = "#000000";
-    // this.DIM_X = 270;
-    // this.DIM_Y = 270;
+    this.complete = false;
     this.platforms = [];
     this.walls = [];
     this.unclimbableWalls = [];
@@ -121,8 +119,12 @@ class Level{
         height: 50
       }
     )
+    
+  }
+
+  createWalls(){
     //ceiling
-    this.platforms.push(
+    this.walls.push(
       {
         x: 0,
         y: 0,
@@ -130,9 +132,6 @@ class Level{
         height: 50
       }
     )
-  }
-
-  createWalls(){
     //far right wall
     this.walls.push(
       {
@@ -164,9 +163,9 @@ class Level{
     this.walls.push(
       {
       x: 650,
-      y: 50,
+      y: 175,
       width: 150,
-      height: 400
+      height: 275
       }
     )
     //entrance overhang
@@ -195,7 +194,7 @@ class Level{
       width: 25,
       height: 50
       }
-    ) 
+    )
     
   }
 
@@ -207,7 +206,15 @@ class Level{
       x: 10,
       y: 50,
       width: 25,
-      height: 750
+      height: 550
+      }
+    )
+    this.unclimbableWalls.push(
+      {
+      x: 650,
+      y: 50,
+      width: 150,
+      height: 125
       }
     )
      

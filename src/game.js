@@ -17,6 +17,15 @@ class Game{
     this.keydown = this.keydown.bind(this);
     this.keyup = this.keyup.bind(this);
   }
+  
+  levelOver(){
+    if(this.level.complete){
+      return true
+    } else {
+      return false
+    }
+    
+  }
 
   keyListeners() {
     document.addEventListener("keydown", this.keydown);
@@ -31,6 +40,7 @@ class Game{
     const img = new Image();
     img.src = './src/assets/images/cave.jpg'
     this.ctx.drawImage(img, 0, 0, 1500, 1000);
+    
   }
   
   renderPlayer(){
@@ -40,7 +50,7 @@ class Game{
   renderPlatforms(){
     // this.ctx.fillStyle = "#45597E";
     const img = new Image();
-    img.src = './src/assets/images/rock_texture2.png';
+    img.src = './src/assets/images/white_rock.png';
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.platforms.length; i++){
@@ -52,7 +62,7 @@ class Game{
   renderWalls(){
     // this.ctx.fillStyle = "#45597E";
     const img = new Image();
-    img.src = './src/assets/images/rock_texture.png';
+    img.src = './src/assets/images/blue_rock.png';
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.walls.length; i++){
@@ -61,17 +71,28 @@ class Game{
     }
   }
   renderUnclimbableWalls(){
-    this.ctx.fillStyle = "#45597E";
-    // const img = new Image();
-    // img.src = '../src/assets/images/rock_texture.png';
-    // const pattern = this.ctx.createPattern(img, 'repeat');
-    // this.ctx.fillStyle = pattern;
+    // this.ctx.fillStyle = "#45597E";
+    const img = new Image();
+    img.src = './src/assets/images/white_rock.png';
+    const pattern = this.ctx.createPattern(img, 'repeat');
+    this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.unclimbableWalls.length; i++){
       this.ctx.fillRect(this.level.unclimbableWalls[i].x - 17, this.level.unclimbableWalls[i].y, this.level.unclimbableWalls[i].width -7, this.level.unclimbableWalls[i].height);
     
     }
   }
   
+  renderRope(){
+    const img = new Image();
+    img.src = './src/assets/images/rope.png'
+    // this.ctx.drawImage(img, 1240, 175, 20, 20);
+    // if(this.player.x === 1240 && (this.player.y < 180 && this.player.y > 170)){
+    //   this.player.hasRope = true;
+    // }
+    
+    this.ctx.drawImage(img, 50, 925, 20, 20);
+    
+  }
 
   keydown(e) {
     if(e.keyCode === 65) {
@@ -148,6 +169,7 @@ class Game{
   
 
   loop() {
+    
     // changes direction of player image based on which way they are facing
     if (this.player.facing === 'right'){
       this.playerImg.src = './src/assets/images/climber_right.png';
@@ -245,14 +267,29 @@ class Game{
       this.player.x = 30;
       this.player.y = 940;
     }
-    
+
+    //exiting the level
+      if(this.player.x > 1500){
+        this.level.complete = true;
+      }
+
+      
 
     this.renderCanvas();
     this.renderPlayer();
     this.renderPlatforms();
     this.renderWalls();
     this.renderUnclimbableWalls();
+
+    // if (!this.player.hasRope){
+    //   this.renderRope();
+    // }
+    // if(this.player.x === 50){
+    //   this.player.hasRope = true;
+    // }
+    
   }
+  
   
   
   
