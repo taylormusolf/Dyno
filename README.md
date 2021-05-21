@@ -1,8 +1,7 @@
 # Dyno
 
 ## Summary
-Rock climbing themed platforming game where you can climb the cave walls and dynamically 
-jump from rock face to rock to reach the cave exit and find your friends. 
+A rock climbing themed platforming game where you can climb cave walls and dynamically jump from rock face to rock to reach the cave exit to find your friends.
 
 It is a single player game where the user controls a rock climber.  There is an entrance to each level and an exit.
 The goal is to reach the exit and find items.
