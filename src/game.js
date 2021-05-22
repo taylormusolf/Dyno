@@ -172,7 +172,19 @@ class Game{
   
 
   loop() {
-    
+    let gameRun = requestAnimationFrame(this.loop.bind(this));
+    if(this.levelOver()){
+      cancelAnimationFrame(gameRun);
+      const canvas = document.getElementById("canvas");
+      const controls = document.getElementById('controls');
+      const playButton = document.getElementById('play-button');
+      const moreLevels = document.getElementById('more-levels');
+      canvas.classList.add('hidden');
+      playButton.classList.remove('hidden');
+      moreLevels.classList.remove('hidden');
+      controls.classList.add('hidden');
+      this.removeKeyListeners();
+    }
     // changes direction of player image based on which way they are facing
     if (this.player.facing === 'right'){
       this.playerImg.src = '../src/assets/images/climber_right.png';
@@ -219,19 +231,19 @@ class Game{
     for (let i = 0; i < this.level.walls.length; i++){
       //left side of wall
       if( this.player.x >= this.level.walls[i].x && this.player.x + this.player.width < this.level.walls[i].x + this.level.walls[i].width
-        && (this.player.y > this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
+        && (this.player.y > this.level.walls[i].y && this.player.y - 40 <= this.level.walls[i].y + this.level.walls[i].height)
         ){
         this.player.x = this.level.walls[i].x;
       }
       //right side of wall
       if( this.player.x > this.level.walls[i].x && this.player.x <= this.level.walls[i].x + this.level.walls[i].width
-        && (this.player.y > this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
+        && (this.player.y > this.level.walls[i].y && this.player.y - 40 <= this.level.walls[i].y + this.level.walls[i].height)
       ) {
         this.player.x = (this.level.walls[i].x + this.level.walls[i].width);
       }
       //climbing
       if( (this.player.x === this.level.walls[i].x || this.player.x === this.level.walls[i].x + this.level.walls[i].width )
-        && (this.player.y >= this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)){
+        && (this.player.y >= this.level.walls[i].y && this.player.y - 200 <= this.level.walls[i].y + this.level.walls[i].height)){
         this.player.climbing = true;
         this.player.climbingWallIdx = i;
         this.player.x_v = 0;
@@ -259,7 +271,7 @@ class Game{
       (this.player.x !== this.level.walls[this.player.climbingWallIdx].x 
       && this.player.x !== this.level.walls[this.player.climbingWallIdx].x + this.level.walls[this.player.climbingWallIdx].width)
       || (this.player.y < this.level.walls[this.player.climbingWallIdx].y 
-      || this.player.y > this.level.walls[this.player.climbingWallIdx].y + this.level.walls[this.player.climbingWallIdx].height))
+      || this.player.y - 30 > this.level.walls[this.player.climbingWallIdx].y + this.level.walls[this.player.climbingWallIdx].height))
       {
       this.player.climbing = false;
       this.player.climbingWallIdx = null;

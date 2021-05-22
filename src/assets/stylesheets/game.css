@@ -10,11 +10,13 @@ body {
   align-items: center;
   font-family: Norwester;
   color: white;
+  margin: 0px 10px;
 }
 
 .nav-bar{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 900px;
   margin: 10px 0px;
 }
@@ -51,7 +53,7 @@ body {
 
 .social-links{
   color: white;
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .social-links a{
@@ -77,7 +79,7 @@ overflow: hidden;
 
 /* canvas {
   position: absolute;
-} */
+}  */
 
 header {
   font-size: 6em;
@@ -157,7 +159,7 @@ li:hover {
   justify-content: center;
   /* align-items: center; */
   width: 600px;
-  height: 40vh;
+  max-height: 430;
   padding: 0 4vw;
   margin-top: 5vh;
   margin-bottom: 5vh;
@@ -174,7 +176,7 @@ li:hover {
 
 .back-story p {
   font-size: 2em;
-  margin: 3vh 0;
+  padding: 3vh 0;
 }
 
 button {
@@ -189,9 +191,11 @@ button:hover {
 
 .controls{
   margin-top: 20px;
+  margin-left: 20px;
   display: flex;
-  justify-content: space-between;
-  width: 1300px;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  width: 900px;
 }
 
 .credit{
@@ -201,4 +205,32 @@ button:hover {
 }
 .hidden {
   display: none;
+}
+@media only screen and (max-height: 1100px) {
+  .back-story{
+    font-size: 10px;
+    margin: 5px 0px;
+    width: 100%;
+  }
+  .back-story p {
+    padding: 2vh 0;
+    width: 100%;
+  }
+  #logo-container{
+    max-width: 900px;
+    margin: auto;
+  }
+  .nav-bar{
+    max-width: 100%;
+    /* min-width: 550px;
+    max-width: 900px; */
+  }
+  #logo{
+    width: 100%;
+    text-align: center;
+  } 
+  #play-button{
+    margin: 0px 15px;
+  } 
+
 }
