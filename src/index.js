@@ -12,17 +12,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const audioPlay = document.getElementById('audio-play');
   const audioPause = document.getElementById('audio-pause');
   const menu = document.getElementById('menu');
-  const logo = document.getElementById('logo');
+  const logoContainer = document.getElementById('logo-container');
   const controls = document.getElementById('controls');
   const moreLevels = document.getElementById('more-levels');
 
   playButton.addEventListener('click', () => {
-    canvas.width = 1500;
-    canvas.height = 1000;
+    // canvas.width = 1500;
+    // canvas.height = 1000;
+    canvas.width = 800;
+    canvas.height = 600;
     const newGame = new GameDisplay(ctx);
     newGame.start();
     menu.classList.add('hidden');
-    logo.classList.add('hidden');
+    logoContainer.classList.add('hidden');
     canvas.classList.remove('hidden')
     playButton.classList.add('hidden');
     controls.classList.remove('hidden');
@@ -30,15 +32,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
   })
   //for testing
-    // menu.classList.add('hidden');
-    // logo.classList.add('hidden');
-    // playButton.classList.add('hidden');
-    // controls.classList.remove('hidden');
-    // moreLevels.classList.add('hidden');
-    // canvas.width = 1500;
-    // canvas.height = 1000;
-    // const newGame = new GameDisplay(ctx);
-    // newGame.start();
+    menu.classList.add('hidden');
+    logoContainer.classList.add('hidden');
+    playButton.classList.add('hidden');
+    controls.classList.remove('hidden');
+    moreLevels.classList.add('hidden');
+    canvas.width = 800;
+    canvas.height = 600;
+    const newGame = new GameDisplay(ctx);
+    newGame.start();
   //for testing
 
   audioControls.addEventListener('click', () => {
@@ -47,6 +49,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
       audioPlay.classList.remove('hidden');
       audioPause.classList.add('hidden');
     } else {
+      audio.volume = 0.3;
       audio.play();
       audioPause.classList.remove('hidden');
       audioPlay.classList.add('hidden');

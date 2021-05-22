@@ -70,6 +70,16 @@ class Game{
     
     }
   }
+  renderCeilings(){
+    const img = new Image();
+    img.src = '../src/assets/images/blue_rock.png';
+    const pattern = this.ctx.createPattern(img, 'repeat');
+    this.ctx.fillStyle = pattern;
+    for(let i = 0; i < this.level.ceilings.length; i++){
+      this.ctx.fillRect(this.level.ceilings[i].x - 17, this.level.ceilings[i].y, this.level.ceilings[i].width -7, this.level.ceilings[i].height);
+    
+    }
+  }
   renderUnclimbableWalls(){
     // this.ctx.fillStyle = "#45597E";
     const img = new Image();
@@ -169,7 +179,19 @@ class Game{
   
 
   loop() {
-    
+    let gameRun = requestAnimationFrame(this.loop.bind(this));
+    if(this.levelOver()){
+      cancelAnimationFrame(gameRun);
+      const canvas = document.getElementById("canvas");
+      const controls = document.getElementById('controls');
+      const playButton = document.getElementById('play-button');
+      const moreLevels = document.getElementById('more-levels');
+      canvas.classList.add('hidden');
+      playButton.classList.remove('hidden');
+      moreLevels.classList.remove('hidden');
+      controls.classList.add('hidden');
+      this.removeKeyListeners();
+    }
     // changes direction of player image based on which way they are facing
     if (this.player.facing === 'right'){
       this.playerImg.src = './src/assets/images/climber_right.png';
@@ -203,7 +225,7 @@ class Game{
     let falling = true;
     for (let i = 0; i < this.level.platforms.length; i++) {
       if(this.level.platforms[i].x < this.player.x && this.player.x < this.level.platforms[i].x + this.level.platforms[i].width + this.player.width  &&
-        this.level.platforms[i].y < this.player.y && this.player.y < this.level.platforms[i].y + this.level.platforms[i].height){
+        this.level.platforms[i].y < this.player.y && this.player.y < this.level.platforms[i].y + this.level.platforms[i].height+15){
           falling = false;
           let platIndex = i;
         if (!falling){
@@ -216,19 +238,19 @@ class Game{
     for (let i = 0; i < this.level.walls.length; i++){
       //left side of wall
       if( this.player.x >= this.level.walls[i].x && this.player.x + this.player.width < this.level.walls[i].x + this.level.walls[i].width
-        && (this.player.y > this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
+        && (this.player.y > this.level.walls[i].y && this.player.y - 40 <= this.level.walls[i].y + this.level.walls[i].height)
         ){
         this.player.x = this.level.walls[i].x;
       }
       //right side of wall
       if( this.player.x > this.level.walls[i].x && this.player.x <= this.level.walls[i].x + this.level.walls[i].width
-        && (this.player.y > this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)
+        && (this.player.y > this.level.walls[i].y && this.player.y - 40 <= this.level.walls[i].y + this.level.walls[i].height)
       ) {
         this.player.x = (this.level.walls[i].x + this.level.walls[i].width);
       }
       //climbing
       if( (this.player.x === this.level.walls[i].x || this.player.x === this.level.walls[i].x + this.level.walls[i].width )
-        && (this.player.y >= this.level.walls[i].y && this.player.y <= this.level.walls[i].y + this.level.walls[i].height)){
+        && (this.player.y >= this.level.walls[i].y && this.player.y - 200 <= this.level.walls[i].y + this.level.walls[i].height)){
         this.player.climbing = true;
         this.player.climbingWallIdx = i;
         this.player.x_v = 0;
@@ -249,6 +271,15 @@ class Game{
         this.player.x = (this.level.unclimbableWalls[i].x + this.level.unclimbableWalls[i].width);
       }
     }
+    for (let i = 0; i < this.level.ceilings.length; i++){
+      //under ceiling
+      if( this.player.x > this.level.ceilings[i].x && this.player.x <= this.level.ceilings[i].x + this.level.ceilings[i].width
+        && (this.player.y - 40 > this.level.ceilings[i].y && this.player.y - 40 <= this.level.ceilings[i].y + this.level.ceilings[i].height)
+      ) {
+        this.player.y = (this.level.ceilings[i].y + this.level.ceilings[i].height) + 40;
+        this.player.y_v = 2.5
+      }
+    }
 
 
     if(this.player.climbing){
@@ -256,20 +287,22 @@ class Game{
       (this.player.x !== this.level.walls[this.player.climbingWallIdx].x 
       && this.player.x !== this.level.walls[this.player.climbingWallIdx].x + this.level.walls[this.player.climbingWallIdx].width)
       || (this.player.y < this.level.walls[this.player.climbingWallIdx].y 
-      || this.player.y > this.level.walls[this.player.climbingWallIdx].y + this.level.walls[this.player.climbingWallIdx].height))
+      || this.player.y - 30 > this.level.walls[this.player.climbingWallIdx].y + this.level.walls[this.player.climbingWallIdx].height))
       {
       this.player.climbing = false;
       this.player.climbingWallIdx = null;
       }
     }
     //falling in a pit
-    if(this.player.y > 1100 || this.player.x < 0){
-      this.player.x = 30;
-      this.player.y = 940;
+    if(this.player.y > 615){
+      this.player.x = 50;
+      this.player.y = 570;
+      this.player.x_v = 0;
+      this.player.y_v = 0;
     }
 
     //exiting the level
-      if(this.player.x > 1500){
+      if(this.player.x > 800){
         this.level.complete = true;
       }
 
@@ -280,6 +313,7 @@ class Game{
     this.renderPlatforms();
     this.renderWalls();
     this.renderUnclimbableWalls();
+    this.renderCeilings();
 
     // if (!this.player.hasRope){
     //   this.renderRope();
