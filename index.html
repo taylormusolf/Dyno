@@ -3,25 +3,25 @@
     <meta charset="utf-8">
     <title>Dyno</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./src/assets/stylesheets/reset.css" />
-    <link rel="stylesheet" type="text/css" href="./src/assets/stylesheets/game.css" />
-    <link rel="icon" type="image/png" href="./src/assets/images/climber_icon.png" />
-    <script type="application/javascript" src="./dist/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="../src/assets/stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../src/assets/stylesheets/game.css" />
+    <link rel="icon" type="image/png" href="../src/assets/images/climber_icon.png" />
+    <script type="application/javascript" src="./main.js"></script>
     <meta property="og:title" content="Dyno" />
-    <meta property="og:image" content="./src/assets/images/dyno_screen.PNG" />
-    <meta
-      property="og:description"
-      content="A rock climbing themed platforming game where you can climb cave walls and dynamically jump from rock face to rock to reach the cave exit to find your friends."
-    />
-    <meta
-      property="og:url"
-      content="http://dyno.taylormusolf.com/"
-    />
+     <meta property="og:image" content="../src/assets/images/dyno_screen.PNG" />
+     <meta
+       property="og:description"
+       content="A rock climbing themed platforming game where you can climb cave walls and dynamically jump from rock face to rock to reach the cave exit to find your friends."
+     />
+     <meta
+       property="og:url"
+       content="http://dyno.taylormusolf.com/"
+     />
   </head>
 
   <body class='stop-scrolling'>
-    <header id='logo'>
-      <img id='logo' src="./src/assets/images/dyno_logo_2.png"/>
+    <header id='logo-container'>
+      <img id='logo' src="../src/assets/images/dyno_logo_2.png"/>
       <article class='credit'>
         <p>Game by Taylor Musolf</p>
         <p>Music by Kai Engel</p>
@@ -34,7 +34,10 @@
         <a  href="https://angel.co/u/taylor-musolf" target="_blank"><i class="fa fa-angellist"></i></a>
       </div>
       <li id='play-button'>Play</li>
-      <img id='small-logo' class= 'hidden' src="./src/assets/images/dyno_logo.png"/>
+      <div id='player-menu' class='hidden'>
+        Player Lives:
+        <span id='player-lives'> 3</span>
+      </div>
       <div class='audio-controls'>
         <div>Music</div>
         <i id='audio-play' class="fa fa-play"></i>
@@ -43,7 +46,7 @@
     </nav>
     
     
-    <audio loop id='audio' src='./src/assets/audio/Kai_Engel_-_Moonlight_Reprise.mp3'></audio>
+    <audio loop id='audio' src='../src/assets/audio/Kai_Engel_-_Moonlight_Reprise.mp3'></audio>
     
     <ul id='menu'>
       <span class='game-text'>
@@ -52,20 +55,9 @@
           <h1>The Story So Far..</h1>
           <p>You slept in too late and your friends went to explore the cave without you</p>
           <p>Look for clues they may have left behind to catch up to them</p>
-          <p>Climb the walls to reach the cave exit</p>
+          <p>Climb walls to reach the cave exit</p>
           
         </article>
-        
-
-        <!-- <article class='instructions'>
-          <h1>Controls/Instructions</h1>
-          <p>A, D - Move left and right</p>
-          <p>W, S - Press repeatedly to climb up and down walls</p>
-          <p>SpaceBar - Jump</p>
-          <p>Find your way to the exit and collect Mementos along the way!</p>
-        </article> -->
-
-        
       </span>
       
 
@@ -75,12 +67,17 @@
       <p>Press play to start the level again!</p>
     </article>
 
+    <article id="game-over" class="more-levels hidden">
+      <h1>Game Over!</h1>
+      <p>Press Play to start over!</p>
+    </article>
+
     <div class="game-container">
       <div class="canvas-container">
         <canvas id="canvas"></canvas>
       </div>
     </div>
-    <article id='controls' class="hidden">
+    <article id='controls' class="controls hidden">
       <h1>Controls:</h1>
       <p>A, D - left and right</p>
       <p>W, S - Press repeatedly to climb up and down walls</p>
