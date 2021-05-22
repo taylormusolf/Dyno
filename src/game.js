@@ -16,6 +16,7 @@ class Game{
     };
     this.keydown = this.keydown.bind(this);
     this.keyup = this.keyup.bind(this);
+    this.gameOver = false;
   }
   
   levelOver(){
@@ -25,6 +26,10 @@ class Game{
       return false
     }
     
+  }
+
+  gameOverMet(){
+    this.gameOver = true;
   }
 
   keyListeners() {
@@ -176,21 +181,35 @@ class Game{
       this.player.canClimb = true;
     }
   }
+  updatePlayerMenu(){
+    const playerMenu = document.getElementById('player-menu');
+    const playerLives = document.getElementById('player-lives');
+    let lives = document.createElement('span');
+    lives.setAttribute('id', 'player-lives')
+    lives.textContent = this.player.lives
+    playerMenu.replaceChild(lives, playerLives);
+  }
   
 
   loop() {
     let gameRun = requestAnimationFrame(this.loop.bind(this));
-    if(this.levelOver()){
+    if(this.levelOver() || this.gameOver === true){
       cancelAnimationFrame(gameRun);
       const canvas = document.getElementById("canvas");
       const controls = document.getElementById('controls');
       const playButton = document.getElementById('play-button');
-      const moreLevels = document.getElementById('more-levels');
       canvas.classList.add('hidden');
       playButton.classList.remove('hidden');
-      moreLevels.classList.remove('hidden');
       controls.classList.add('hidden');
       this.removeKeyListeners();
+    }
+    if(this.levelOver()){
+      const moreLevels = document.getElementById('more-levels');
+      moreLevels.classList.remove('hidden');
+    }
+    if(this.gameOver){
+      const gameOver = document.getElementById('game-over');
+      gameOver.classList.remove('hidden');
     }
     // changes direction of player image based on which way they are facing
     if (this.player.facing === 'right'){
@@ -294,13 +313,20 @@ class Game{
       }
     }
     //falling in a pit
-    if(this.player.y > 615){
+    if(this.player.y > 630){
       this.player.x = 50;
       this.player.y = 570;
       this.player.x_v = 0;
       this.player.y_v = 0;
+      this.player.lives -= 1;
+      this.updatePlayerMenu();
+    }
+    //game over
+    if(this.player.lives === 0){
+      this.gameOverMet();
     }
 
+    
     //exiting the level
       if(this.player.x > 800){
         this.level.complete = true;

@@ -18,6 +18,7 @@ class Player{
     this.canClimb = true;
     this.wallJump = true;
     this.facing = 'right';
+    this.lives = 3;
     // this.hasRope = false;
   }
 
