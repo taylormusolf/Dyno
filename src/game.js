@@ -218,7 +218,7 @@ class Game{
     let falling = true;
     for (let i = 0; i < this.level.platforms.length; i++) {
       if(this.level.platforms[i].x < this.player.x && this.player.x < this.level.platforms[i].x + this.level.platforms[i].width + this.player.width  &&
-        this.level.platforms[i].y < this.player.y && this.player.y < this.level.platforms[i].y + this.level.platforms[i].height){
+        this.level.platforms[i].y < this.player.y && this.player.y < this.level.platforms[i].y + this.level.platforms[i].height+25){
           falling = false;
           let platIndex = i;
         if (!falling){

@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   })
   //for testing
     menu.classList.add('hidden');
-    logo.classList.add('hidden');
+    logoContainer.classList.add('hidden');
     playButton.classList.add('hidden');
     controls.classList.remove('hidden');
     moreLevels.classList.add('hidden');
