@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const logoContainer = document.getElementById('logo-container');
   const controls = document.getElementById('controls');
   const moreLevels = document.getElementById('more-levels');
+  const gameOver = document.getElementById('game-over');
+  const playerMenu = document.getElementById('player-menu')
 
   playButton.addEventListener('click', () => {
     // canvas.width = 1500;
@@ -29,18 +31,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
     playButton.classList.add('hidden');
     controls.classList.remove('hidden');
     moreLevels.classList.add('hidden');
-    
+    gameOver.classList.add('hidden');
+    playerMenu.classList.remove('hidden');
   })
   //for testing
-    menu.classList.add('hidden');
-    logoContainer.classList.add('hidden');
-    playButton.classList.add('hidden');
-    controls.classList.remove('hidden');
-    moreLevels.classList.add('hidden');
-    canvas.width = 800;
-    canvas.height = 600;
-    const newGame = new GameDisplay(ctx);
-    newGame.start();
+    // menu.classList.add('hidden');
+    // logoContainer.classList.add('hidden');
+    // playButton.classList.add('hidden');
+    // controls.classList.remove('hidden');
+    // moreLevels.classList.add('hidden');
+    // canvas.width = 800;
+    // canvas.height = 600;
+    // const newGame = new GameDisplay(ctx);
+    // newGame.start();
   //for testing
 
   audioControls.addEventListener('click', () => {

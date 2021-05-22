@@ -34,7 +34,10 @@
         <a  href="https://angel.co/u/taylor-musolf" target="_blank"><i class="fa fa-angellist"></i></a>
       </div>
       <li id='play-button'>Play</li>
-      <img id='small-logo' class= 'hidden' src="../src/assets/images/dyno_logo.png"/>
+      <div id='player-menu' class='hidden'>
+        Player Lives:
+        <span id='player-lives'> 3</span>
+      </div>
       <div class='audio-controls'>
         <div>Music</div>
         <i id='audio-play' class="fa fa-play"></i>
@@ -55,17 +58,6 @@
           <p>Climb walls to reach the cave exit</p>
           
         </article>
-        
-
-        <!-- <article class='instructions'>
-          <h1>Controls/Instructions</h1>
-          <p>A, D - Move left and right</p>
-          <p>W, S - Press repeatedly to climb up and down walls</p>
-          <p>SpaceBar - Jump</p>
-          <p>Find your way to the exit and collect Mementos along the way!</p>
-        </article> -->
-
-        
       </span>
       
 
@@ -73,6 +65,11 @@
     <article id="more-levels" class="more-levels hidden">
       <h1>More Levels to Come!</h1>
       <p>Press play to start the level again!</p>
+    </article>
+
+    <article id="game-over" class="more-levels hidden">
+      <h1>Game Over!</h1>
+      <p>Press Play to start over!</p>
     </article>
 
     <div class="game-container">
