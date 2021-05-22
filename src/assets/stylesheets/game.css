@@ -124,6 +124,9 @@ li:hover {
 
 .more-levels{
   margin: auto;
+  height: 600px;
+  /* margin-left: auto;
+  margin-right: auto; */
   font-size: 50px;
 }
 

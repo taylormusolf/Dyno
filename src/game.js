@@ -73,6 +73,16 @@ class Game{
     
     }
   }
+  renderCeilings(){
+    const img = new Image();
+    img.src = '../src/assets/images/blue_rock.png';
+    const pattern = this.ctx.createPattern(img, 'repeat');
+    this.ctx.fillStyle = pattern;
+    for(let i = 0; i < this.level.ceilings.length; i++){
+      this.ctx.fillRect(this.level.ceilings[i].x - 17, this.level.ceilings[i].y, this.level.ceilings[i].width -7, this.level.ceilings[i].height);
+    
+    }
+  }
   renderUnclimbableWalls(){
     // this.ctx.fillStyle = "#45597E";
     const img = new Image();
@@ -218,7 +228,7 @@ class Game{
     let falling = true;
     for (let i = 0; i < this.level.platforms.length; i++) {
       if(this.level.platforms[i].x < this.player.x && this.player.x < this.level.platforms[i].x + this.level.platforms[i].width + this.player.width  &&
-        this.level.platforms[i].y < this.player.y && this.player.y < this.level.platforms[i].y + this.level.platforms[i].height+25){
+        this.level.platforms[i].y < this.player.y && this.player.y < this.level.platforms[i].y + this.level.platforms[i].height+15){
           falling = false;
           let platIndex = i;
         if (!falling){
@@ -264,6 +274,15 @@ class Game{
         this.player.x = (this.level.unclimbableWalls[i].x + this.level.unclimbableWalls[i].width);
       }
     }
+    for (let i = 0; i < this.level.ceilings.length; i++){
+      //under ceiling
+      if( this.player.x > this.level.ceilings[i].x && this.player.x <= this.level.ceilings[i].x + this.level.ceilings[i].width
+        && (this.player.y - 40 > this.level.ceilings[i].y && this.player.y - 40 <= this.level.ceilings[i].y + this.level.ceilings[i].height)
+      ) {
+        this.player.y = (this.level.ceilings[i].y + this.level.ceilings[i].height) + 40;
+        this.player.y_v = 2.5
+      }
+    }
 
 
     if(this.player.climbing){
@@ -278,13 +297,15 @@ class Game{
       }
     }
     //falling in a pit
-    if(this.player.y > 1100 || this.player.x < 0){
-      this.player.x = 30;
-      this.player.y = 940;
+    if(this.player.y > 615){
+      this.player.x = 50;
+      this.player.y = 570;
+      this.player.x_v = 0;
+      this.player.y_v = 0;
     }
 
     //exiting the level
-      if(this.player.x > 1500){
+      if(this.player.x > 800){
         this.level.complete = true;
       }
 
@@ -295,6 +316,7 @@ class Game{
     this.renderPlatforms();
     this.renderWalls();
     this.renderUnclimbableWalls();
+    this.renderCeilings();
 
     // if (!this.player.hasRope){
     //   this.renderRope();

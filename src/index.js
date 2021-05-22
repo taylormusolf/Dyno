@@ -17,10 +17,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const moreLevels = document.getElementById('more-levels');
 
   playButton.addEventListener('click', () => {
-    canvas.width = 1500;
-    canvas.height = 1000;
-    // canvas.width = 900;
-    // canvas.height = 600;
+    // canvas.width = 1500;
+    // canvas.height = 1000;
+    canvas.width = 800;
+    canvas.height = 600;
     const newGame = new GameDisplay(ctx);
     newGame.start();
     menu.classList.add('hidden');
@@ -37,8 +37,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     playButton.classList.add('hidden');
     controls.classList.remove('hidden');
     moreLevels.classList.add('hidden');
-    canvas.width = 1500;
-    canvas.height = 1000;
+    canvas.width = 800;
+    canvas.height = 600;
     const newGame = new GameDisplay(ctx);
     newGame.start();
   //for testing
