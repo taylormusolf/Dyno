@@ -1,16 +1,22 @@
 # <div align='center'> <img width="589" alt="dyno logo" src="https://user-images.githubusercontent.com/71670060/119405986-fb2bcc80-bc96-11eb-8d12-61cc225b8e60.PNG"> </div>
 
-## Summary
-A rock climbing themed platforming game where you can climb cave walls and dynamically jump from rock face to rock to reach the cave exit to find your friends.
+Dyno is a rock climbing themed platforming game where you can climb cave walls and dynamically jump from rock face to rock to reach the cave exit to find your friends.
 
 It is a single player game where the user controls a rock climber.  There is an entrance to each level and an exit.
 The goal is to reach the exit and find items.
 
-## Functionality and MVP's
+Try the game for yourself [here!](https://dyno.taylormusolf.com)
 
- 1. Generate a cave-like environment for platforming and style it
- 2. Player to be able to move in the environment, jump and climb it
- 3. Have an About screen that describes backstory and game instructions
+## Technologies
+ * `JavaScript` - programming language used for the game logic
+ * `HTML 5 canvas` - game objects and images rendered in 
+ * `HTML audio` - utilized for game audio
+ * `Webpack` - used to bundled the game files
+
+## Features
+ * Generate a cave-like environment for platforming and style it
+ * Player to be able to move in the environment, jump and climb it
+ * Have an About screen that describes backstory and game instructions
 
 ## Start Screen
  The game has a start screen which includes story background and general level objective.  
@@ -24,16 +30,8 @@ The goal is to reach the exit and find items.
  The player's current inventory of items collected will be added to the top of the screen when the feature is added.
  
  <img width="1322" alt="play screen capture" src="https://user-images.githubusercontent.com/71670060/116838785-7f050400-ab84-11eb-9796-c2b22b600d68.PNG">
-
  
-## Technologies
- * game logic will be in JavaScript
- * game objects and images rendered in HTML 5 canvas
- * game audio will utilize HTML audio
- * game to be bundled with webpack
- Major files will include the entry file, game.js, player.js, index.js
- 
-## Future Additions
+## Future Implementations
  * Additional levels
  * Sprite Animations
  * Stamina bar for climbing
