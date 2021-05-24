@@ -9,8 +9,8 @@ Try the game for yourself [here!](https://dyno.taylormusolf.com)
 
 ## Technologies
  * `JavaScript` - programming language used for the game logic
- * `HTML 5 canvas` - game objects and images rendered in 
- * `HTML audio` - utilized for game audio
+ * `HTML 5 Canvas` - game objects and images rendered in 
+ * `HTML Audio` - utilized for game audio
  * `Webpack` - used to bundled the game files
 
 ## Features
