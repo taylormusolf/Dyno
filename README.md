@@ -38,13 +38,13 @@ The goal is to reach the exit and find items.
  * game audio will utilize HTML audio
  * game to be bundled with webpack
  Major files will include the entry file, game.js, player.js, index.js
-
-## Timeline
- * Day 1: Setup all necessary dependencies.  Write skeleton of entry file and all needed files.  
-  Start getting base environment rendered and begin player movement.
- * Day 2: Finish basic movement and work on rope physics.  Finish player.js and work on rope.js.
- * Day 3: Finish rope physics and add 'memento' items
- * Day 4: Add level variation and finish styling
+ 
+## Future Additions
+ * Additional levels
+ * Sprite Animations
+ * Stamina bar for climbing
+ * Memento items and inventory
+ * Rope climbing feature
 
 ## Credits
  * Music credit goes to Kai Engel for "Moonlight Reprise" found on Free Music Archive
