@@ -1,4 +1,4 @@
-# Dyno
+# <div align='center'> <img width="589" alt="dyno logo" src="https://user-images.githubusercontent.com/71670060/119405986-fb2bcc80-bc96-11eb-8d12-61cc225b8e60.PNG"> </div>
 
 ## Summary
 A rock climbing themed platforming game where you can climb cave walls and dynamically jump from rock face to rock to reach the cave exit to find your friends.
