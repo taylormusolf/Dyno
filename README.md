@@ -11,12 +11,6 @@ The goal is to reach the exit and find items.
  1. Generate a cave-like environment for platforming and style it
  2. Player to be able to move in the environment, jump and climb it
  3. Have an About screen that describes backstory and game instructions
- 4. Have a production README
- ### Bonus / Future add-ons
- 1. Player can collect 'memento' objects scattered around environment and they are added to their inventory
- 2. Player can go into new environments or levels after reaching exit of current level
- 3. Sprite update for player animations
- 4. Player can use a rope to dynamically move around
 
 ## Start Screen
  The game has a start screen which includes story background and general level objective.  
