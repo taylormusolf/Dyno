@@ -79,7 +79,7 @@ class Level{
       x: 400,
       y: 400,
       width: 200,
-      height: 400
+      height: 200
       }
     )
     //right wall overhang

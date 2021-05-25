@@ -1,10 +1,13 @@
 const Player = require('./player');
 const Level = require('./level');
+const Level2 = require('./level_2')
 
 class Game{
   constructor(ctx){
     this.player = new Player();
     this.level = new Level();
+    // this.level = new Level2();
+    this.currentLevel = 1;
     this.ctx = ctx;
     this.playerImg = new Image();
     this.playerImg.src = '../src/assets/images/climber_right.png';
@@ -27,6 +30,13 @@ class Game{
     }
     
   }
+  // gameComplete(){
+  //   if(this.level.complete &&){
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
 
   gameOverMet(){
     this.gameOver = true;
@@ -40,14 +50,11 @@ class Game{
     document.removeEventListener("keydown", this.keydown);
     document.removeEventListener("keyup", this.keyup);
   }
-  // gameOverCheck(){
-  //   this.player.x > 1500 || this.player.x < 0 || this.player.y < 0 || this.player.y > 1000  
-  // }
   
   renderCanvas(){
     const img = new Image();
     img.src = '../src/assets/images/cave.jpg'
-    this.ctx.drawImage(img, 0, 0, 1500, 1000);
+    this.ctx.drawImage(img, 0, 0, 800, 600);
     
   }
   
@@ -196,17 +203,19 @@ class Game{
 
   loop() {
     let gameRun = requestAnimationFrame(this.loop.bind(this));
-    if(this.levelOver() || this.gameOver === true){
+    if((this.levelOver() && this.currentLevel === 2) || this.gameOver === true){
       cancelAnimationFrame(gameRun);
       const canvas = document.getElementById("canvas");
       const controls = document.getElementById('controls');
       const playButton = document.getElementById('play-button');
+      const playerMenu = document.getElementById('player-menu');
       canvas.classList.add('hidden');
       playButton.classList.remove('hidden');
       controls.classList.add('hidden');
+      playerMenu.classList.add('hidden');
       this.removeKeyListeners();
     }
-    if(this.levelOver()){
+    if(this.levelOver() && this.currentLevel === 2){
       const moreLevels = document.getElementById('more-levels');
       moreLevels.classList.remove('hidden');
     }
@@ -214,6 +223,13 @@ class Game{
       const gameOver = document.getElementById('game-over');
       gameOver.classList.remove('hidden');
     }
+    if (this.levelOver() && this.currentLevel === 1){
+      this.player.x = 50;
+      this.player.y = 570;
+      this.level = new Level2();
+      this.currentLevel === 2;
+    }
+
     // changes direction of player image based on which way they are facing
     if (this.player.facing === 'right'){
       this.playerImg.src = '../src/assets/images/climber_right.png';
@@ -316,7 +332,7 @@ class Game{
       }
     }
     //falling in a pit
-    if(this.player.y > 630){
+    if(this.player.y > 1000){
       this.player.x = 50;
       this.player.y = 570;
       this.player.x_v = 0;
