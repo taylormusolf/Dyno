@@ -7,9 +7,9 @@ class Game{
   constructor(ctx){
     this.player = new Player();
     // this.level = new Level();
-    this.level = new Level2();
+    this.level = new Level3();
     // this.currentLevel = 1;
-    this.currentLevel = 2;
+    this.currentLevel = 3;
     this.ctx = ctx;
     this.playerImg = new Image();
     this.playerImg.src = '../src/assets/images/climber_right.png';
@@ -221,7 +221,7 @@ class Game{
     }
     if (this.levelOver() && this.currentLevel === 2){
       this.player.x = 50;
-      this.player.y = 570;
+      this.player.y = 150;
       this.level = new Level3();
       this.currentLevel === 3;
     }
@@ -329,8 +329,14 @@ class Game{
     }
     //falling in a pit
     if(this.player.y > 1000){
-      this.player.x = 50;
-      this.player.y = 570;
+      if(this.currentLevel === 3){
+        this.player.x = 50;
+        this.player.y = 150;
+      } else{
+        this.player.x = 50;
+        this.player.y = 570;
+      }
+      
       this.player.x_v = 0;
       this.player.y_v = 0;
       this.player.lives -= 1;

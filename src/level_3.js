@@ -5,100 +5,94 @@ class Level3{
     this.walls = [];
     this.unclimbableWalls = [];
     this.ceilings = [];
-    this.createPlatforms();
-    this.createWalls();
-    this.createUnclimbableWalls();
-    this.createCeilings();
+    this.createObjects();
   }
   
-  createPlatforms(){
+  createObjects(){
      //start platform
-     this.platforms.push(
+    this.platforms.push(
       {
-      x: -5,
+        x: -5,
+        y: 150,
+        width: 100,
+        height: 21
+      }
+    )
+      //start bottom plat
+    this.platforms.push(
+      {
+      x: 97,
       y: 550,
-      width: 326,
+      width: 200,
       height: 60
       }
     )
-    //exit platform
-    this.platforms.push(
-      {
-        x: 625,
-        y: 550,
-        width: 1200,
-        height: 50
-      }
-    )
-    //mid platform
-    this.platforms.push(
-      {
-      x: 383,
-      y: 379,
-      width: 193,
-      height: 21
-      }
-    )   
-      //entrance overhang platform
-    this.platforms.push(
-      {
-      x: 60,
-      y: 105,
-      width: 345,
-      height: 20
-      }
-    )
-    
-    
-    
-  }
-
-  createWalls(){
-    //entrance wall
+      //entrance wall
     this.walls.push(
       {
-      x: 10,
-      y: 50,
+      x: -5,
+      y: 171,
+      width: 125,
+      height: 450
+      }
+    )
+    //pogo wall 1
+    this.walls.push(
+      {
+      x: 175,
+      y: 300,
       width: 25,
-      height: 400
+      height: 250
       }
     )
-    //entrance overhang
+    this.platforms.push(
+      {
+        x: 158,
+        y: 280,
+        width: 17,
+        height: 21
+      }
+    )
+
+    //pogo wall 2
     this.walls.push(
       {
-      x: 75,
-      y: 125,
-      width: 350,
+      x: 300,
+      y: 200,
+      width: 25,
       height: 200
       }
     )
-    
-    //center wall
+    this.platforms.push(
+      {
+        x: 283,
+        y: 180,
+        width: 17,
+        height: 21
+      }
+    )
+    //pogo wall 3
     this.walls.push(
       {
       x: 400,
-      y: 400,
-      width: 200,
-      height: 200
+      y: 300,
+      width: 25,
+      height: 300
       }
     )
-    //right wall overhang
-    this.walls.push(
+    this.platforms.push(
       {
-      x: 650,
-      y: 50,
-      width: 150,
-      height: 400
+        x: 383,
+        y: 280,
+        width: 17,
+        height: 21
       }
     )
-    
-    
-  }
+    //exit platform
 
-
-  createUnclimbableWalls(){
+    //mid platform
+ 
     //left wall or entrance wall
-    
     this.unclimbableWalls.push(
       {
       x: -5,
@@ -107,9 +101,6 @@ class Level3{
       height: 600
       }
     )
-     
-  }
-  createCeilings(){
     // main ceiling
     this.ceilings.push(
       {
@@ -119,23 +110,38 @@ class Level3{
         height: 50
       }
     )
-    this.ceilings.push(
+      //floating plat 1
+    this.platforms.push(
+      {
+      x: 475,
+      y: 400,
+      width: 125,
+      height: 21
+      }
+    )
+      //floating plat 2
+    this.platforms.push(
+      {
+      x: 475,
+      y: 250,
+      width: 125,
+      height: 21
+      }
+    )
+    //exit plat
+    this.platforms.push(
       {
       x: 650,
-      y: 450,
-      width: 150,
-      height: 10
+      y: 550,
+      width: 200,
+      height: 60
       }
     )
-    this.ceilings.push(
-      {
-      x: 75,
-      y: 325,
-      width: 350,
-      height: 10
-      }
-    )
+    
+   
   }
+    
+
 
 }
 

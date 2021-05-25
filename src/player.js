@@ -1,10 +1,10 @@
 class Player{
   constructor(){
-    this.x = 50;
-    this.y = 570;
+    // this.x = 50;
+    // this.y = 570;
     //testing
-    // this.x = 1450;
-    // this.y = 120;
+    this.x = 50;
+    this.y = 150;
     //testing
     this.x_v = 0;
     this.y_v = 0;
