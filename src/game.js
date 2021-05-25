@@ -1,10 +1,17 @@
 const Player = require('./player');
-const Level = require('./level');
+const Level = require('./level_1');
+const Level2 = require('./level_2')
+const Level3 = require('./level_3')
 
 class Game{
   constructor(ctx){
     this.player = new Player();
     this.level = new Level();
+    //testing
+    //this.level = new Level3();
+    //this.currentLevel = 3;
+    //testing
+    this.currentLevel = 1;
     this.ctx = ctx;
     this.playerImg = new Image();
     this.playerImg.src = './src/assets/images/climber_right.png';
@@ -43,8 +50,8 @@ class Game{
   
   renderCanvas(){
     const img = new Image();
-    img.src = './src/assets/images/cave.jpg'
-    this.ctx.drawImage(img, 0, 0, 1500, 1000);
+    img.src = '../src/assets/images/cave.jpg'
+    this.ctx.drawImage(img, 0, 0, 800, 600);
     
   }
   
@@ -59,9 +66,7 @@ class Game{
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.platforms.length; i++){
-      // this.ctx.fillRect(this.level.platforms[i].x, this.level.platforms[i].y, this.level.platforms[i].width, this.level.platforms[i].height);
       this.ctx.fillRect(this.level.platforms[i].x, this.level.platforms[i].y, this.level.platforms[i].width, this.level.platforms[i].height);
-    
     }
   }
   renderWalls(){
@@ -72,7 +77,6 @@ class Game{
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.walls.length; i++){
       this.ctx.fillRect(this.level.walls[i].x - 17, this.level.walls[i].y, this.level.walls[i].width -7, this.level.walls[i].height);
-    
     }
   }
   renderCeilings(){
@@ -82,7 +86,6 @@ class Game{
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.ceilings.length; i++){
       this.ctx.fillRect(this.level.ceilings[i].x - 17, this.level.ceilings[i].y, this.level.ceilings[i].width -7, this.level.ceilings[i].height);
-    
     }
   }
   renderUnclimbableWalls(){
@@ -93,7 +96,6 @@ class Game{
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.unclimbableWalls.length; i++){
       this.ctx.fillRect(this.level.unclimbableWalls[i].x - 17, this.level.unclimbableWalls[i].y, this.level.unclimbableWalls[i].width -7, this.level.unclimbableWalls[i].height);
-    
     }
   }
   
@@ -193,17 +195,19 @@ class Game{
 
   loop() {
     let gameRun = requestAnimationFrame(this.loop.bind(this));
-    if(this.levelOver() || this.gameOver === true){
+    if((this.levelOver() && this.currentLevel === 3) || this.gameOver === true){
       cancelAnimationFrame(gameRun);
       const canvas = document.getElementById("canvas");
       const controls = document.getElementById('controls');
       const playButton = document.getElementById('play-button');
+      const playerMenu = document.getElementById('player-menu');
       canvas.classList.add('hidden');
       playButton.classList.remove('hidden');
       controls.classList.add('hidden');
+      playerMenu.classList.add('hidden');
       this.removeKeyListeners();
     }
-    if(this.levelOver()){
+    if(this.levelOver() && this.currentLevel === 3){
       const moreLevels = document.getElementById('more-levels');
       moreLevels.classList.remove('hidden');
     }
@@ -211,6 +215,19 @@ class Game{
       const gameOver = document.getElementById('game-over');
       gameOver.classList.remove('hidden');
     }
+    if (this.levelOver() && this.currentLevel === 1){
+      this.player.x = 50;
+      this.player.y = 570;
+      this.level = new Level2();
+      this.currentLevel =2;
+    }
+    if (this.levelOver() && this.currentLevel === 2){
+      this.player.x = 50;
+      this.player.y = 150;
+      this.level = new Level3();
+      this.currentLevel = 3;
+    }
+    
     // changes direction of player image based on which way they are facing
     if (this.player.facing === 'right'){
       this.playerImg.src = './src/assets/images/climber_right.png';
@@ -313,9 +330,15 @@ class Game{
       }
     }
     //falling in a pit
-    if(this.player.y > 630){
-      this.player.x = 50;
-      this.player.y = 570;
+    if(this.player.y > 1000){
+      if(this.currentLevel === 3){
+        this.player.x = 50;
+        this.player.y = 150;
+      } else{
+        this.player.x = 50;
+        this.player.y = 570;
+      }
+      
       this.player.x_v = 0;
       this.player.y_v = 0;
       this.player.lives -= 1;

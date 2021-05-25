@@ -19,8 +19,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const playerMenu = document.getElementById('player-menu')
 
   playButton.addEventListener('click', () => {
-    // canvas.width = 1500;
-    // canvas.height = 1000;
     canvas.width = 800;
     canvas.height = 600;
     const newGame = new GameDisplay(ctx);
@@ -42,6 +40,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     // moreLevels.classList.add('hidden');
     // canvas.width = 800;
     // canvas.height = 600;
+    // gameOver.classList.add('hidden');
+    // playerMenu.classList.remove('hidden');
     // const newGame = new GameDisplay(ctx);
     // newGame.start();
   //for testing

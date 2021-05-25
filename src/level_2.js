@@ -1,58 +1,108 @@
 class Level2{
   constructor(){
-    // this.BG_COLOR = "#000000";
-    // this.DIM_X = 270;
-    // this.DIM_Y = 270;
+    this.complete = false;
     this.platforms = [];
     this.walls = [];
+    this.unclimbableWalls = [];
+    this.ceilings = [];
     this.createPlatforms();
     this.createWalls();
+    this.createUnclimbableWalls();
+    this.createCeilings();
   }
   
   createPlatforms(){
-    // this.platforms.push(
-    //   {
-    //   x: 0,
-    //   y: 900,
-    //   width: 110,
-    //   height: 20
-    //   }
-    // )
-    // this.platforms.push(
-    //   {
-    //   x: 50,
-    //   y: 850,
-    //   width: 110,
-    //   height: 20
-    //   }
-    // )
-    // this.platforms.push(
-    //   {
-    //   x: 200,
-    //   y: 750,
-    //   width: 110,
-    //   height: 20
-    //   }
-    // )
-    this.platforms.push(
+     //start platform
+     this.platforms.push(
       {
-      x: 1383,
-      y: 200,
-      width: 150,
-      height: 21
-      }
-    )  
-    //floor
-    this.platforms.push(
-      {
-        x: 0,
-        y: 950,
-        width: 1500,
-        height: 50
+      x: -5,
+      y: 550,
+      width: 326,
+      height: 60
       }
     )
-    //ceiling
+    //exit platform
     this.platforms.push(
+      {
+        x: 625,
+        y: 150,
+        width: 1200,
+        height: 21
+      }
+    )
+    //mid platform 1
+    this.platforms.push(
+      {
+      x: 150,
+      y: 200,
+      width: 125,
+      height: 21
+      }
+    ) 
+    //mid platform 2
+    this.platforms.push(
+      {
+      x: 272,
+      y: 125,
+      width: 125,
+      height: 21
+      }
+    ) 
+    //mid platform 3
+    this.platforms.push(
+      {
+      x: 400,
+      y: 200,
+      width: 125,
+      height: 21
+      }
+    )
+    
+    
+    
+  }
+
+  createWalls(){
+    //entrance wall
+    this.walls.push(
+      {
+      x: 10,
+      y: 50,
+      width: 75,
+      height: 400
+      }
+    )
+    //exit wall
+    this.walls.push(
+      {
+      x: 642,
+      y: 171,
+      width: 200,
+      height: 450
+      }
+    )
+    
+    
+    
+  }
+
+
+  createUnclimbableWalls(){
+    //left wall or entrance wall
+    
+    this.unclimbableWalls.push(
+      {
+      x: -5,
+      y: 50,
+      width: 25,
+      height: 600
+      }
+    )
+     
+  }
+  createCeilings(){
+    // main ceiling
+    this.ceilings.push(
       {
         x: 0,
         y: 0,
@@ -60,60 +110,20 @@ class Level2{
         height: 50
       }
     )
-  }
-
-  createWalls(){
-    this.walls.push(
+    //entrance ceiling
+    this.ceilings.push(
       {
-      x: 1400,
-      y: 221,
-      width: 150,
-      height: 729
+      x: 10,
+      y: 450,
+      width: 75,
+      height: 10
       }
     )
-    this.walls.push(
-      {
-      x: 1200,
-      y: 221,
-      width: 150,
-      height: 650
-      }
-    )
-    this.walls.push(
-      {
-      x: 50,
-      y: 900,
-      width: 25,
-      height: 200
-      }
-    )
-    this.walls.push(
-      {
-      x: 200,
-      y: 900,
-      width: 25,
-      height: 200
-      }
-    )
-    this.walls.push(
-      {
-      x: 400,
-      y: 900,
-      width: 25,
-      height: 200
-      }
-    )
-    this.walls.push(
-      {
-      x: 550,
-      y: 900,
-      width: 25,
-      height: 200
-      }
-    )  
   }
 
 }
+
+
 
 
 module.exports = Level2;
