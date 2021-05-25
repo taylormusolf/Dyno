@@ -1,4 +1,4 @@
-class Level2{
+class Level3{
   constructor(){
     this.complete = false;
     this.platforms = [];
@@ -25,36 +25,27 @@ class Level2{
     this.platforms.push(
       {
         x: 625,
-        y: 150,
+        y: 550,
         width: 1200,
-        height: 21
+        height: 50
       }
     )
-    //mid platform 1
+    //mid platform
     this.platforms.push(
       {
-      x: 150,
-      y: 200,
-      width: 125,
+      x: 383,
+      y: 379,
+      width: 193,
       height: 21
       }
-    ) 
-    //mid platform 2
+    )   
+      //entrance overhang platform
     this.platforms.push(
       {
-      x: 272,
-      y: 125,
-      width: 125,
-      height: 21
-      }
-    ) 
-    //mid platform 3
-    this.platforms.push(
-      {
-      x: 400,
-      y: 200,
-      width: 125,
-      height: 21
+      x: 60,
+      y: 105,
+      width: 345,
+      height: 20
       }
     )
     
@@ -68,20 +59,38 @@ class Level2{
       {
       x: 10,
       y: 50,
-      width: 75,
+      width: 25,
       height: 400
       }
     )
-    //exit wall
+    //entrance overhang
     this.walls.push(
       {
-      x: 642,
-      y: 171,
-      width: 200,
-      height: 450
+      x: 75,
+      y: 125,
+      width: 350,
+      height: 200
       }
     )
     
+    //center wall
+    this.walls.push(
+      {
+      x: 400,
+      y: 400,
+      width: 200,
+      height: 200
+      }
+    )
+    //right wall overhang
+    this.walls.push(
+      {
+      x: 650,
+      y: 50,
+      width: 150,
+      height: 400
+      }
+    )
     
     
   }
@@ -110,12 +119,19 @@ class Level2{
         height: 50
       }
     )
-    //entrance ceiling
     this.ceilings.push(
       {
-      x: 10,
+      x: 650,
       y: 450,
-      width: 75,
+      width: 150,
+      height: 10
+      }
+    )
+    this.ceilings.push(
+      {
+      x: 75,
+      y: 325,
+      width: 350,
       height: 10
       }
     )
@@ -126,4 +142,4 @@ class Level2{
 
 
 
-module.exports = Level2;
+module.exports = Level3;

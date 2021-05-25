@@ -1,13 +1,15 @@
 const Player = require('./player');
-const Level = require('./level');
+const Level = require('./level_1');
 const Level2 = require('./level_2')
+const Level3 = require('./level_3')
 
 class Game{
   constructor(ctx){
     this.player = new Player();
-    this.level = new Level();
-    // this.level = new Level2();
-    this.currentLevel = 1;
+    // this.level = new Level();
+    this.level = new Level2();
+    // this.currentLevel = 1;
+    this.currentLevel = 2;
     this.ctx = ctx;
     this.playerImg = new Image();
     this.playerImg.src = '../src/assets/images/climber_right.png';
@@ -30,13 +32,6 @@ class Game{
     }
     
   }
-  // gameComplete(){
-  //   if(this.level.complete &&){
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
 
   gameOverMet(){
     this.gameOver = true;
@@ -69,9 +64,7 @@ class Game{
     const pattern = this.ctx.createPattern(img, 'repeat');
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.platforms.length; i++){
-      // this.ctx.fillRect(this.level.platforms[i].x, this.level.platforms[i].y, this.level.platforms[i].width, this.level.platforms[i].height);
       this.ctx.fillRect(this.level.platforms[i].x, this.level.platforms[i].y, this.level.platforms[i].width, this.level.platforms[i].height);
-    
     }
   }
   renderWalls(){
@@ -82,7 +75,6 @@ class Game{
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.walls.length; i++){
       this.ctx.fillRect(this.level.walls[i].x - 17, this.level.walls[i].y, this.level.walls[i].width -7, this.level.walls[i].height);
-    
     }
   }
   renderCeilings(){
@@ -92,7 +84,6 @@ class Game{
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.ceilings.length; i++){
       this.ctx.fillRect(this.level.ceilings[i].x - 17, this.level.ceilings[i].y, this.level.ceilings[i].width -7, this.level.ceilings[i].height);
-    
     }
   }
   renderUnclimbableWalls(){
@@ -103,7 +94,6 @@ class Game{
     this.ctx.fillStyle = pattern;
     for(let i = 0; i < this.level.unclimbableWalls.length; i++){
       this.ctx.fillRect(this.level.unclimbableWalls[i].x - 17, this.level.unclimbableWalls[i].y, this.level.unclimbableWalls[i].width -7, this.level.unclimbableWalls[i].height);
-    
     }
   }
   
@@ -203,7 +193,7 @@ class Game{
 
   loop() {
     let gameRun = requestAnimationFrame(this.loop.bind(this));
-    if((this.levelOver() && this.currentLevel === 2) || this.gameOver === true){
+    if((this.levelOver() && this.currentLevel === 3) || this.gameOver === true){
       cancelAnimationFrame(gameRun);
       const canvas = document.getElementById("canvas");
       const controls = document.getElementById('controls');
@@ -215,7 +205,7 @@ class Game{
       playerMenu.classList.add('hidden');
       this.removeKeyListeners();
     }
-    if(this.levelOver() && this.currentLevel === 2){
+    if(this.levelOver() && this.currentLevel === 3){
       const moreLevels = document.getElementById('more-levels');
       moreLevels.classList.remove('hidden');
     }
@@ -229,7 +219,13 @@ class Game{
       this.level = new Level2();
       this.currentLevel === 2;
     }
-
+    if (this.levelOver() && this.currentLevel === 2){
+      this.player.x = 50;
+      this.player.y = 570;
+      this.level = new Level3();
+      this.currentLevel === 3;
+    }
+    
     // changes direction of player image based on which way they are facing
     if (this.player.facing === 'right'){
       this.playerImg.src = '../src/assets/images/climber_right.png';
