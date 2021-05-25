@@ -6,10 +6,12 @@ const Level3 = require('./level_3')
 class Game{
   constructor(ctx){
     this.player = new Player();
-    // this.level = new Level();
-    this.level = new Level3();
-    // this.currentLevel = 1;
-    this.currentLevel = 3;
+    this.level = new Level();
+    //testing
+    //this.level = new Level3();
+    //this.currentLevel = 3;
+    //testing
+    this.currentLevel = 1;
     this.ctx = ctx;
     this.playerImg = new Image();
     this.playerImg.src = '../src/assets/images/climber_right.png';
@@ -217,13 +219,13 @@ class Game{
       this.player.x = 50;
       this.player.y = 570;
       this.level = new Level2();
-      this.currentLevel === 2;
+      this.currentLevel =2;
     }
     if (this.levelOver() && this.currentLevel === 2){
       this.player.x = 50;
       this.player.y = 150;
       this.level = new Level3();
-      this.currentLevel === 3;
+      this.currentLevel = 3;
     }
     
     // changes direction of player image based on which way they are facing

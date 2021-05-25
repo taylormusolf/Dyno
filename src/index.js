@@ -33,17 +33,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
     playerMenu.classList.remove('hidden');
   })
   //for testing
-    menu.classList.add('hidden');
-    logoContainer.classList.add('hidden');
-    playButton.classList.add('hidden');
-    controls.classList.remove('hidden');
-    moreLevels.classList.add('hidden');
-    canvas.width = 800;
-    canvas.height = 600;
-    gameOver.classList.add('hidden');
-    playerMenu.classList.remove('hidden');
-    const newGame = new GameDisplay(ctx);
-    newGame.start();
+    // menu.classList.add('hidden');
+    // logoContainer.classList.add('hidden');
+    // playButton.classList.add('hidden');
+    // controls.classList.remove('hidden');
+    // moreLevels.classList.add('hidden');
+    // canvas.width = 800;
+    // canvas.height = 600;
+    // gameOver.classList.add('hidden');
+    // playerMenu.classList.remove('hidden');
+    // const newGame = new GameDisplay(ctx);
+    // newGame.start();
   //for testing
 
   audioControls.addEventListener('click', () => {
